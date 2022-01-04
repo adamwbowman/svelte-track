@@ -1,7 +1,7 @@
 
 <script>
 	import { db } from './firebase.js'
-	import { collection, query, orderBy, onSnapshot, addDoc } from "firebase/firestore"; 
+	import { collection, query, orderBy, onSnapshot, addDoc, doc } from "firebase/firestore"; 
 
 	let expenses = [];
 	// 	console.log(`${doc.id} => ${doc.data()}`);
@@ -17,7 +17,7 @@
 	let newLocation = "", newAmount = "", newNote="";
 	let error = "";
 
-	const addExpense = () => {
+	function addExpense() {
 		if (newLocation != "") {
 			//expenses = [...expenses, {location: newLocation}];
 			const docRef = addDoc(expensesCol, {
