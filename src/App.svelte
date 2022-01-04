@@ -1,7 +1,7 @@
 
 <script>
 	import { db } from './firebase.js'
-	import { collection, query, orderBy, onSnapshot, addDoc, doc } from "firebase/firestore"; 
+	import { collection, query, orderBy, onSnapshot, addDoc, doc, deleteDoc } from "firebase/firestore"; 
 
 	let expenses = [];
 	// 	console.log(`${doc.id} => ${doc.data()}`);
@@ -10,7 +10,9 @@
 	const queryAll = query(expensesCol, orderBy("createdAt", "desc"));
 
 	const listenCol = onSnapshot(queryAll, (querySnapshot) => {
-			expenses = querySnapshot.docs.map(doc => doc.data());
+			expenses = querySnapshot.docs.map(doc => {
+				return { id: doc.id, ...doc.data() }
+			});
 			console.table(expenses);
 	});
 
@@ -33,18 +35,17 @@
 		}
 	}
 
-	const deleteExpense = (index) => {
-		let deleteItem = expenses[index];
-		expenses = expenses.filter((item) => item != deleteItem);
-		error = "";
+	async function deleteExpense(index) {
+		console.log(index);
+		await deleteDoc(doc(db, "expenses", index));
 	}
 </script>
 
 <main>
 	<ul>
-		{#each expenses as expense, index}
+		{#each expenses as expense}
 			<li>{expense.location} || {expense.amount} || {expense.note}
-			<button on:click="{() => deleteExpense(index)}">x</button>
+			<button on:click="{() => deleteExpense(expense.id)}">x</button>
 			</li>
 		{/each}
 	</ul>
