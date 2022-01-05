@@ -20,6 +20,7 @@
 	let error = "";
 
 	function addExpense() {
+		resetSubTotal();
 		if (newLocation != "") {
 			//expenses = [...expenses, {location: newLocation}];
 			const docRef = addDoc(expensesCol, {
@@ -37,13 +38,22 @@
 
 	async function deleteExpense(index) {
 		console.log(index);
+		resetSubTotal();
 		await deleteDoc(doc(db, "expenses", index));
 	}
 
-	let Total = 500;
-	let subTotal = 500;
+	function resetSubTotal(){
+		subTotal = parseInt(0);
+	}
+
+	const Total = parseInt(500);
+	let subTotal = parseInt(0);
 	function getSubTotal(amount) {
-		subTotal = (subTotal-amount);
+		if (subTotal == 0) {
+			subTotal = (500-amount);
+		} else {
+			subTotal = (subTotal-amount);
+		}
 		return subTotal;
 	}
 	</script>
@@ -52,7 +62,7 @@
 	<p>Total: {Total}</p>
 	<ul>
 		{#each expenses as expense}
-			<li>{expense.location} || ${expense.amount} || {expense.note} || {getSubTotal(expense.amount)}
+			<li>{expense.location} || ${expense.amount} || {expense.note} || ${getSubTotal(expense.amount)}
 			<button on:click="{deleteExpense(expense.id)}">x</button>
 			</li>
 		{/each}
