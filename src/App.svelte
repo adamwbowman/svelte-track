@@ -63,38 +63,44 @@
   // }
 	</script>
 
-<main class="container">
+<main>
 	<div class="div1">Total: {Total}</div>
 		{#each expenses as expense}
 		<div class="parent">
-
-		<div class="div2">{expense.location}</div>
+			<div class="div2">{expense.location}</div>
 			<div class="div3">(${expense.amount})</div>
-			<div class="div4">{expense.note}</div>
-			<div class="div5">${getSubTotal(expense.amount)}<button on:click="{deleteExpense(expense.id)}">x</div>
-			</div>
-
-				{/each}
-	<div class="parent">
-		<div class="div2"><input type="text" placeholder="Location" bind:value="{newLocation}" /></div>
-		<div class="div3"><input type="text" placeholder="Amount" bind:value="{newAmount}" /></div>
-		<div class="div4"><input type="text" placeholder="Note" bind:value="{newNote}" />
-		<button on:click="{addExpense}">Add</button></div>
-	</div>
-	<div class="div5"></div>
+			<div class="div4">${getSubTotal(expense.amount)}</div>
+			<div class="div5">{expense.note}</div>
+			<div class="div6"><button on:click="{deleteExpense(expense.id)}">x</div>
+		</div>
+		{/each}
+		<div class="parent">
+			<div class="div2"><input type="text" placeholder="Location" bind:value="{newLocation}" /></div>
+			<div class="div3"><input type="text" placeholder="Amount" bind:value="{newAmount}" size="7" /></div>
+			<div class="div4"></div>
+			<div class="div5"><input type="text" placeholder="Note" bind:value="{newNote}" /></div>
+			<div class="div6"><button on:click="{addExpense}">Add</button></div>
+		</div>
 </main>
 
 <style>
 .parent { 
 	display: grid; 
-	grid-template-columns: repeat(4, 1fr); 
-	grid-template-rows: repeat(2, 1fr); 
-	grid-column-gap: 10px;
+	grid-template-rows: 25px 0px; 
+	grid-template-columns: 200px 75px 75px 200px 100px; 
 	grid-row-gap: 10px; 
+	grid-column-gap: 10px;
 }
 .div1 { grid-area: 1 / 1 / 2 / 5; } 
 .div2 { grid-area: 2 / 1 / 3 / 2; } 
-.div3 { grid-area: 2 / 2 / 3 / 3; } 
-.div4 { grid-area: 2 / 3 / 3 / 4; } 
+.div3 { 
+	grid-area: 2 / 2 / 3 / 3; 
+	text-align: right;
+} 
+.div4 { 
+	grid-area: 2 / 3 / 3 / 4; 
+	text-align: right;
+} 
 .div5 { grid-area: 2 / 4 / 3 / 5; } 
+.div6 { grid-area: 2 / 5 / 3 / 6; } 
 </style>
