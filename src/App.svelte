@@ -77,13 +77,21 @@
 		</div>
 		{/each}
 		<div class="parent">
-			<div class="div2"><input type="text" placeholder="Location" bind:value="{newLocation}" size="18" /></div>
+			<div class="div2">
+				<input type="text" placeholder="Location" bind:value="{newLocation}" size="18" />
+			</div>
 			<div class="div3"></div>
-			<div class="div4"><input type="text" placeholder="$" bind:value="{newAmount}" size="5" /></div>
+			<div class="div4">
+				<input type="text" placeholder="$" bind:value="{newAmount}" size="5" />
+			</div>
 			<div class="div5"></div>
 			<div class="div6"></div>
-			<div class="div7"><input type="text" placeholder="Note" bind:value="{newNote}" size="18" /></div>
-			<div class="div8"><button on:click="{addExpense}">Add</button></div>
+			<div class="div7">
+				<input type="text" placeholder="Note" bind:value="{newNote}" size="18" />
+			</div>
+			<div class="div8">
+				<button on:click="{addExpense}">Add</button>
+			</div>
 		</div>
 </main>
 
@@ -112,6 +120,8 @@
 .div6 { 
 	grid-area: 2 / 5 / 3 / 6;
 	text-align: right; 
+	font-weight: bolder;
+	font-style: italic;
 }
 .div7 { grid-area: 2 / 6 / 3 / 7; }
 .div8 { grid-area: 2 / 7 / 3 / 8; } 
