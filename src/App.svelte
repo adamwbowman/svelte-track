@@ -105,24 +105,18 @@
 .parent { 
 	display: grid; 
 	grid-template-rows: 25px 0px; 
-	grid-template-columns: 200px 25px 50px 25px 50px 200px 100px; 
+	grid-template-columns: 200px 0px 100px 0px 100px 200px 0px; 
 	grid-row-gap: 10px; 
 	grid-column-gap: 5px;
 }
 .div1 { grid-area: 1 / 1 / 2 / 8; } 
 .div2 { grid-area: 2 / 1 / 3 / 2; } 
-.div3 { 
-	grid-area: 2 / 2 / 3 / 3; 
-	text-align: right;
-} 
+.div3 { grid-area: 2 / 2 / 3 / 3; } 
 .div4 { 
 	grid-area: 2 / 3 / 3 / 4; 
 	text-align: right;
 } 
-.div5 { 
-	grid-area: 2 / 4 / 3 / 5; 
-	text-align: right;
-} 
+.div5 { grid-area: 2 / 4 / 3 / 5; } 
 .div6 { 
 	grid-area: 2 / 5 / 3 / 6;
 	text-align: right; 
