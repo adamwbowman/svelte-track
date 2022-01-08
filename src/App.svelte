@@ -21,7 +21,7 @@
 
 	function addExpense() {
 		resetSubTotal();
-		if (newLocation != "") {
+		if ((newLocation != "") && (newAmount != "")) {
 			//expenses = [...expenses, {location: newLocation}];
 			const docRef = addDoc(expensesCol, {
 				location: newLocation,
@@ -57,6 +57,12 @@
 		return subTotal;
 	}
 
+	function handleEnter(event) {
+		if (event.key == "Enter") {
+			addExpense();
+		}
+	}
+
 	// let editing = false;
 	// function edit() {
   //   editing = true
@@ -78,16 +84,16 @@
 		{/each}
 		<div class="parent">
 			<div class="div2">
-				<input type="text" placeholder="Location" bind:value="{newLocation}" size="18" />
+				<input type="text" placeholder="Location" on:keypress="{handleEnter}" bind:value="{newLocation}" size="18" />
 			</div>
 			<div class="div3"></div>
 			<div class="div4">
-				<input type="text" placeholder="$" bind:value="{newAmount}" size="5" />
+				<input type="text" placeholder="$" on:keypress="{handleEnter}" bind:value="{newAmount}" size="5" />
 			</div>
 			<div class="div5"></div>
 			<div class="div6"></div>
 			<div class="div7">
-				<input type="text" placeholder="Note" bind:value="{newNote}" size="18" />
+				<input type="text" placeholder="Note" on:keypress="{handleEnter}" bind:value="{newNote}" size="18" />
 			</div>
 			<div class="div8">
 				<button on:click="{addExpense}">Add</button>
