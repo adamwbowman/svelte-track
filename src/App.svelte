@@ -4,7 +4,6 @@
 	import { collection, query, orderBy, onSnapshot, addDoc, doc, deleteDoc } from "firebase/firestore"; 
 
 	let expenses = [];
-	// 	console.log(`${doc.id} => ${doc.data()}`);
 
 	const expensesCol = collection(db, 'expenses');
 	const queryAll = query(expensesCol, orderBy("createdAt", "asc"));
@@ -50,9 +49,9 @@
 	let subTotal = parseInt(0);
 	function getSubTotal(amount) {
 		if (subTotal == 0) {
-			subTotal = (500-amount);
+			subTotal = (500-amount).toFixed(2);
 		} else {
-			subTotal = (subTotal-amount);
+			subTotal = (subTotal-amount).toFixed(2);
 		}
 		return subTotal;
 	}
@@ -78,7 +77,7 @@
 			<div class="div4">({expense.amount})</div>
 			<div class="div5">$</div>
 			<div class="div6">{getSubTotal(expense.amount)}</div>
-			<div class="div7">{expense.note}</div>
+			<div class="div7"><a href="#" class="tag">{expense.note}</a></div>
 			<div class="div8"><button on:click="{deleteExpense(expense.id)}">x</div>
 		</div>
 		{/each}
@@ -104,7 +103,7 @@
 <style>
 .parent { 
 	display: grid; 
-	grid-template-rows: 25px 0px; 
+	grid-template-rows: 45px 0px; 
 	grid-template-columns: 200px 0px 100px 0px 100px 200px 0px; 
 	grid-row-gap: 10px; 
 	grid-column-gap: 5px;
@@ -116,13 +115,69 @@
 	grid-area: 2 / 3 / 3 / 4; 
 	text-align: right;
 } 
-.div5 { grid-area: 2 / 4 / 3 / 5; } 
+.div5 { 
+	grid-area: 2 / 4 / 3 / 5; 
+	font-weight: bold;
+	font-style: italic;
+} 
 .div6 { 
 	grid-area: 2 / 5 / 3 / 6;
 	text-align: right; 
-	font-weight: bolder;
+	font-weight: bold;
 	font-style: italic;
 }
 .div7 { grid-area: 2 / 6 / 3 / 7; }
 .div8 { grid-area: 2 / 7 / 3 / 8; } 
+/* .tags {
+  list-style: none;
+  margin: 0;
+  overflow: hidden; 
+  padding: 0;
+}
+.tags li {
+  float: left; 
+} */
+.tag {
+  background: #eee;
+  /* border-radius: 3px 0 0 3px; */
+  color: #999;
+  display: inline-block;
+	font-size: small;
+  height: 20px;
+  line-height: 20px;
+  padding: 0 20px 0 5px;
+  position: relative;
+  /* margin: 0 10px 10px 0; */
+	text-align: center;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+/* .tag::before {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+  content: '';
+  height: 6px;
+  left: 10px;
+  position: absolute;
+  width: 6px;
+  top: 10px;
+}
+.tag::after {
+  background: #fff;
+  border-bottom: 13px solid transparent;
+  border-left: 10px solid #eee;
+  border-top: 13px solid transparent;
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+} */
+.tag:hover {
+  background-color: crimson;
+  color: white;
+}
+.tag:hover::after {
+   border-left-color: crimson; 
+}
 </style>
