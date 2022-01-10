@@ -78,7 +78,7 @@
 			<div class="div5">$</div>
 			<div class="div6">{getSubTotal(expense.amount)}</div>
 			<div class="div7"><button class="button button4">{expense.note}</button></div>
-			<div class="div8"><button class="button button4" on:click="{deleteExpense(expense.id)}">x</div>
+			<div class="div8"><button class="button button4" on:click="{deleteExpense(expense.id)}"><span class="fas fa-trash-alt"></span></button></div>
 		</div>
 		{/each}
 		<div class="parent">
@@ -95,7 +95,7 @@
 				<input type="text" placeholder="Note" on:keypress="{handleEnter}" bind:value="{newNote}" size="18" />
 			</div>
 			<div class="div8">
-				<button on:click="{addExpense}">Add</button>
+				<button type="button" class="btn btn-success" on:click="{addExpense}">Add</button>
 			</div>
 		</div>
 </main>
