@@ -77,8 +77,8 @@
 			<div class="div4">({expense.amount})</div>
 			<div class="div5">$</div>
 			<div class="div6">{getSubTotal(expense.amount)}</div>
-			<div class="div7"><a href="#" class="tag">{expense.note}</a></div>
-			<div class="div8"><button on:click="{deleteExpense(expense.id)}">x</div>
+			<div class="div7"><button class="button button4">{expense.note}</button></div>
+			<div class="div8"><button class="button button4" on:click="{deleteExpense(expense.id)}">x</div>
 		</div>
 		{/each}
 		<div class="parent">
@@ -103,7 +103,7 @@
 <style>
 .parent { 
 	display: grid; 
-	grid-template-rows: 45px 0px; 
+	grid-template-rows: 25px 0px; 
 	grid-template-columns: 200px 0px 100px 0px 100px 200px 0px; 
 	grid-row-gap: 10px; 
 	grid-column-gap: 5px;
@@ -128,56 +128,16 @@
 }
 .div7 { grid-area: 2 / 6 / 3 / 7; }
 .div8 { grid-area: 2 / 7 / 3 / 8; } 
-/* .tags {
-  list-style: none;
-  margin: 0;
-  overflow: hidden; 
-  padding: 0;
-}
-.tags li {
-  float: left; 
-} */
-.tag {
-  background: #eee;
-  /* border-radius: 3px 0 0 3px; */
-  color: #999;
-  display: inline-block;
-	font-size: small;
-  height: 20px;
-  line-height: 20px;
-  padding: 0 20px 0 5px;
-  position: relative;
-  /* margin: 0 10px 10px 0; */
-	text-align: center;
+.button {
+  background-color: lightgray;
+  border: 1px solid black;
+  color: black;
+  padding: 4px 10px 4px 10px;
+  text-align: center;
   text-decoration: none;
-  transition: color 0.2s;
+  display: inline-block;
+  font-size: 12px;
+  margin: 0px 0px;
 }
-/* .tag::before {
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
-  content: '';
-  height: 6px;
-  left: 10px;
-  position: absolute;
-  width: 6px;
-  top: 10px;
-}
-.tag::after {
-  background: #fff;
-  border-bottom: 13px solid transparent;
-  border-left: 10px solid #eee;
-  border-top: 13px solid transparent;
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 0;
-} */
-.tag:hover {
-  background-color: crimson;
-  color: white;
-}
-.tag:hover::after {
-   border-left-color: crimson; 
-}
+.button4 {border-radius: 4px;}
 </style>
