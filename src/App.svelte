@@ -71,43 +71,86 @@
 	}
 	</script>
 
-<main>
+<!-- <main>
 	<div class="container">
-		<div class="row">
-				<div class="col">Total: {Total}</div>
-		</div>
-		<table class="table table-striped">
+		<table class="table caption-top table-striped table-hover">
+			<caption>Total: ${Total}</caption>
 			<thead>
-				<tr>
-					<th scope="col">Location</th>
-					<th scope="col">Amount</th>
-					<th scope="col">SubTotal</th>
-					<th scope="col">Tags</th>
-					<th scope="col">&nbsp;</th>
+				<tr class="d-flex">
+					<th scope="col" class="col-3">Location</th>
+					<th scope="col" class="col-1">&nbsp;</th>
+					<th scope="col" class="col-1 text-end">Amount</th>
+					<th scope="col" class="col-1">&nbsp;</th>
+					<th scope="col" class="col-2 text-end">SubTotal</th>
+					<th scope="col" class="col-2">Tags</th>
+					<th scope="col" class="col-2">&nbsp;</th>
 				</tr>
 			</thead>
 			<tbody>
 				{#each expenses as expense}
-				<tr>
-					<td>{expense.location}</td>
-					<td>({expense.amount})</td>
-					<td>{getSubTotal(expense.amount)}</td>
-					<td><span class="badge rounded-pill bg-info">{expense.note}</span></td>
-					<td><button class="btn btn-secondary btn-sm" on:click="{deleteExpense(expense.id)}"><span class="fas fa-trash-alt"></span></button></td>
+				<tr class="d-flex">
+					<td class="col-3">{expense.location}</td>
+					<td class="col-1">$</td>
+					<td class="col-1 text-end">({expense.amount})</td>
+					<td class="col-1">$</td>
+					<td class="col-2 text-end">{getSubTotal(expense.amount)}</td>
+					<td class="col-2"><span class="badge rounded-pill bg-info">{expense.note}</span></td>
+					<td class="col-2 text-center "><button class="btn btn-secondary btn-sm" on:click="{deleteExpense(expense.id)}"><span class="fas fa-trash-alt"></span></button></td>
 				</tr>
 				{/each}
-				<tr>
-					<td><input type="form-control" on:keypress="{handleEnter}" bind:value="{newLocation}"/></td>
-					<td><input type="form-control" on:keypress="{handleEnter}" bind:value="{newAmount}"/></td>
-					<td>&nbsp;</td>
-					<td><input type="form-control" on:keypress="{handleEnter}" bind:value="{newNote}"/></td>
-					<td><button type="button" class="btn btn-success btn-sm" on:click="{addExpense}">Add</button></td>
-				</tr>
 			</tbody>
+			<tfoot>
+				<tr class="d-flex">
+					<td class="col-3"><input type="text" class="form-control" placeholder="Location" on:keypress="{handleEnter}" bind:value="{newLocation}"/></td>
+					<td class="col-1">$</td>
+					<td class="col-1"><input type="text" class="form-control" on:keypress="{handleEnter}" bind:value="{newAmount}"/></td>
+					<td class="col-1">$</td>
+					<td class="col-2">&nbsp;</td>
+					<td class="col-2"><input type="text" class="form-control" placeholder="Tags" on:keypress="{handleEnter}" bind:value="{newNote}"/></td>
+					<td class="col-2 text-center"><button type="button" class="btn btn-primary" on:click="{addExpense}">Add</button></td>
+				</tr>
+			</tfoot>
 		</table>
+	</div>
+</main> -->
+
+<main>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#/">${Total}</a>
+		</div>
+	</nav>
+	<div class="container">
+		{#each expenses as expense}
+		<div class="row" style="height: 40px">
+			<div class="col-md-3">{expense.location}</div>
+			<div class="col-md-2 clearfix">
+				<div class="float-start"></div>
+				<div class="float-end">({expense.amount})</div>
+			</div>
+			<div class="col-md-2 clearfix">
+				<div class="float-start">$</div>
+				<div class="float-end">{getSubTotal(expense.amount)}</div>
+			</div>
+			<div class="col-md-4"><span class="badge rounded-pill bg-info">{expense.note}</span></div>
+			<div class="col-md-1"><button class="btn btn-outline-secondary btn-sm" on:click="{deleteExpense(expense.id)}"><span class="fas fa-trash-alt"></span></button></div>
+		</div>
+		{/each}
+		<div class="row">
+			<div class="col-md-3 input-group-sm"><input type="text" class="form-control" placeholder="Location" on:keypress="{handleEnter}" bind:value="{newLocation}"/></div>
+			<div class="col-md-2">
+				<div class="input-group input-group-sm mb-2">
+					<span class="input-group-text">$</span>
+					<input type="text" class="form-control" aria-label="Dollar amount">
+				</div>
+			</div>
+			<div class="col-md-2"></div>
+			<div class="col-md-4 input-group-sm"><input type="text" class="form-control" placeholder="Tags" on:keypress="{handleEnter}" bind:value="{newNote}"/></div>
+			<div class="col-md-1"><button type="button" class="btn btn-success btn-sm" on:click="{addExpense}"><span class="fas fa-plus"></span></button></div>
+		</div>
 	</div>
 </main>
 
 <style>
-
+.navbar {margin-bottom: 15px;}
 </style>
