@@ -40,7 +40,7 @@
 			newLocation = "", newAmount = "", newNote = "";	
 			error = "";
 		} else {
-			error = "Location is required"
+			error = "Both location and an amount are required."
 		}
 	}
 
@@ -102,6 +102,15 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-4 input-group-sm"><input type="text" class="form-control" placeholder="Tags" on:keypress="{handleEnter}" bind:value="{newNote}"/></div>
 			<div class="col-md-1"><button type="button" class="btn btn-success btn-sm" on:click="{addExpense}"><span class="fas fa-plus"></span></button></div>
+		</div>
+		<div class="row">
+			<div class="col-md-5">
+			{#if (error != "") }
+			<div class="alert alert-danger" role="alert">
+				{error}
+			</div>
+			{/if}
+			</div>
 		</div>
 	</div>
 </main>
