@@ -18,7 +18,6 @@
 			console.table(expenses);
 	});
 
-
 	// page vars
 	const Total = parseInt(500);
 	let subTotal = parseInt(0);
@@ -46,7 +45,6 @@
 	}
 
 	async function deleteExpense(index) {
-		console.log(index);
 		resetSubTotal();
 		await deleteDoc(doc(db, "expenses", index));
 	}
@@ -70,49 +68,6 @@
 		}
 	}
 	</script>
-
-<!-- <main>
-	<div class="container">
-		<table class="table caption-top table-striped table-hover">
-			<caption>Total: ${Total}</caption>
-			<thead>
-				<tr class="d-flex">
-					<th scope="col" class="col-3">Location</th>
-					<th scope="col" class="col-1">&nbsp;</th>
-					<th scope="col" class="col-1 text-end">Amount</th>
-					<th scope="col" class="col-1">&nbsp;</th>
-					<th scope="col" class="col-2 text-end">SubTotal</th>
-					<th scope="col" class="col-2">Tags</th>
-					<th scope="col" class="col-2">&nbsp;</th>
-				</tr>
-			</thead>
-			<tbody>
-				{#each expenses as expense}
-				<tr class="d-flex">
-					<td class="col-3">{expense.location}</td>
-					<td class="col-1">$</td>
-					<td class="col-1 text-end">({expense.amount})</td>
-					<td class="col-1">$</td>
-					<td class="col-2 text-end">{getSubTotal(expense.amount)}</td>
-					<td class="col-2"><span class="badge rounded-pill bg-info">{expense.note}</span></td>
-					<td class="col-2 text-center "><button class="btn btn-secondary btn-sm" on:click="{deleteExpense(expense.id)}"><span class="fas fa-trash-alt"></span></button></td>
-				</tr>
-				{/each}
-			</tbody>
-			<tfoot>
-				<tr class="d-flex">
-					<td class="col-3"><input type="text" class="form-control" placeholder="Location" on:keypress="{handleEnter}" bind:value="{newLocation}"/></td>
-					<td class="col-1">$</td>
-					<td class="col-1"><input type="text" class="form-control" on:keypress="{handleEnter}" bind:value="{newAmount}"/></td>
-					<td class="col-1">$</td>
-					<td class="col-2">&nbsp;</td>
-					<td class="col-2"><input type="text" class="form-control" placeholder="Tags" on:keypress="{handleEnter}" bind:value="{newNote}"/></td>
-					<td class="col-2 text-center"><button type="button" class="btn btn-primary" on:click="{addExpense}">Add</button></td>
-				</tr>
-			</tfoot>
-		</table>
-	</div>
-</main> -->
 
 <main>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -141,7 +96,7 @@
 			<div class="col-md-2">
 				<div class="input-group input-group-sm mb-2">
 					<span class="input-group-text">$</span>
-					<input type="text" class="form-control" aria-label="Dollar amount">
+					<input type="text" class="form-control" aria-label="Dollar amount"  on:keypress="{handleEnter}" bind:value="{newAmount}"/>
 				</div>
 			</div>
 			<div class="col-md-2"></div>
@@ -152,5 +107,7 @@
 </main>
 
 <style>
-.navbar {margin-bottom: 15px;}
+.navbar {
+	margin-bottom: 15px;
+}
 </style>
