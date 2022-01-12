@@ -2,7 +2,7 @@
 <script>
 	import { db } from './firebase.js'
 	import { collection, query, orderBy, onSnapshot, addDoc, doc, deleteDoc } from "firebase/firestore"; 
-
+	
 	// initial collection
 	let expenses = [];
 
