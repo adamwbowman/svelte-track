@@ -76,61 +76,93 @@
 			addExpense();
 		}
 	}
-	</script>
+</script>
 
 <main>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid mb-0 h1">
 			<a class="navbar-brand" href="#/">${Total}</a>
 		</div>
-
-
 	</nav>
+
 	<div class="container">
 		<div class="row">
-			<div class="col border">1</div>
-			<div class="col border">2</div>
-			<div class="col border">3</div>
-			<div class="col border">4</div>
-			<div class="col border">5</div>
-			<div class="col border">6</div>
-			<div class="col border">7</div>
-			<div class="col border">8</div>
-			<div class="col border">9</div>
-			<div class="col border">10</div>
-			<div class="col border">11</div>
-			<div class="col border">12</div>
-			<div class="col border">13</div>
+			<div class="col mb-3">
+					<label for="exampleLocation" class="form-label">Location</label>
+					<input type="type" class="form-control" id="exampleLocation">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col mb-3">
+					<label for="exampleAmount" class="form-label">Amount</label>
+					<input type="number" class="form-control" id="exampleAmount">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<label for="exampleTag" class="form-label">Tag</label>
+				<div class="btn-group d-flex" role="group" aria-label="Tag Button Group">
+					<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+					<label class="btn btn-outline-secondary" for="btnradio1">Radio 1</label>
+				
+					<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+					<label class="btn btn-outline-secondary" for="btnradio2">Radio 2</label>
+				
+					<input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+					<label class="btn btn-outline-secondary" for="btnradio3">Radio 3</label>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col"><br /><br />
+				<!-- <label for="exampleTag" class="form-label">Button</label> -->
+				<button type="button" class="btn btn-success" style="width: 100%">Success</button>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+<br /><br /><br /><br /><br /><br /><br />
+
+
+
+
+
+
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-12 col-md-3 input-group-sm"><input type="text" class="form-control" placeholder="Location" on:keypress="{handleEnter}" bind:value="{newLocation}"/></div>
+			<div class="col-12 col-md-2">
+				<div class="input-group input-group-sm mb-2">
+					<span class="input-group-text">$</span>
+					<input type="number" class="form-control" aria-label="Dollar amount"  on:keypress="{handleEnter}" bind:value="{newAmount}"/>
+				</div>
+			</div>
+			<div class="col-12 col-md-2"></div>
+			<div class="col-10 col-md-4 input-group-sm"><input type="text" class="form-control" placeholder="Tags" on:keypress="{handleEnter}" bind:value="{newNote}"/></div>
+			<div class="col-2 col-md-1"><button type="button" class="btn btn-success btn-sm" on:click="{addExpense}"><span class="fas fa-plus"></span></button></div>
 		</div>
 		{#each expenses as expense}
 		<div class="row" style="height: 40px">
-			<div class="col-md-3">{expense.location}</div>
-			<div class="col-md-2 clearfix">
+			<div class="col-6 col-md-3">{expense.location}</div>
+			<div class="col-6 col-md-2 clearfix">
 				<div class="float-start"></div>
 				<div class="float-end">({expense.amount})</div>
 			</div>
-			<div class="col-md-2 clearfix">
+			<div class="col-6 col-md-2 clearfix">
 				<div class="float-start">$</div>
 				<div class="float-end">{getSubTotal(expense.amount)}</div>
 			</div>
-			<div class="col-md-4"><span class="badge rounded-pill bg-info">{expense.note}</span></div>
-			<div class="col-md-1"><button class="btn btn-outline-secondary btn-sm" on:click="{deleteExpense(expense.id)}"><span class="fas fa-trash-alt"></span></button></div>
+			<div class="col-6 col-md-4"><span class="badge rounded-pill bg-info">{expense.note}</span></div>
+			<div class="col-12 col-md-1"><button class="btn btn-outline-secondary btn-sm" on:click="{deleteExpense(expense.id)}"><span class="fas fa-trash-alt"></span></button></div>
 		</div>
 		{/each}
-		<div class="row">
-			<div class="col-md-3 input-group-sm"><input type="text" class="form-control" placeholder="Location" on:keypress="{handleEnter}" bind:value="{newLocation}"/></div>
-			<div class="col-md-2">
-				<div class="input-group input-group-sm mb-2">
-					<span class="input-group-text">$</span>
-					<input type="text" class="form-control" aria-label="Dollar amount"  on:keypress="{handleEnter}" bind:value="{newAmount}"/>
-				</div>
-			</div>
-			<div class="col-md-2"></div>
-			<div class="col-md-4 input-group-sm"><input type="text" class="form-control" placeholder="Tags" on:keypress="{handleEnter}" bind:value="{newNote}"/></div>
-
-			
-			<div class="col-md-1"><button type="button" class="btn btn-success btn-sm" on:click="{addExpense}"><span class="fas fa-plus"></span></button></div>
-		</div>
 		<!-- error alert -->
 		<div class="row">
 			<div class="col-md-5">
@@ -141,55 +173,6 @@
 			{/if}
 			</div>
 		</div>
-
-
-<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-	Launch demo modal
-</button>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Tags</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				{#each tags as tag}
-				<div class="alert alert-{tag.color}" role="alert">
-					{tag.name}
-				</div>
-				{/each}
-			</div>
-		</div>
-	</div>
-</div> -->
-
-
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-  Button with data-bs-target
-</button>
-
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    <div>
-      Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
-    </div>
-    <div class="dropdown mt-3">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
-        Dropdown button
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <li><a class="dropdown-item" href="/#">Action</a></li>
-        <li><a class="dropdown-item" href="/#">Another action</a></li>
-        <li><a class="dropdown-item" href="/#">Something else here</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
 	</div>
 </main>
 
@@ -198,8 +181,13 @@
 	margin-bottom: 15px;
 }
 @media only screen and (max-width: 600px) {
-  main {
-    background-color: lightblue;
-  }
+	main {
+		background-color: lightblue;
+	}
+	/* .container {
+		margin-left: 50px;
+		margin-right: 50px;
+	} */
 }
+
 </style>
