@@ -79,12 +79,29 @@
 	</script>
 
 <main>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<div class="container-fluid">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid mb-0 h1">
 			<a class="navbar-brand" href="#/">${Total}</a>
 		</div>
+
+
 	</nav>
 	<div class="container">
+		<div class="row">
+			<div class="col border">1</div>
+			<div class="col border">2</div>
+			<div class="col border">3</div>
+			<div class="col border">4</div>
+			<div class="col border">5</div>
+			<div class="col border">6</div>
+			<div class="col border">7</div>
+			<div class="col border">8</div>
+			<div class="col border">9</div>
+			<div class="col border">10</div>
+			<div class="col border">11</div>
+			<div class="col border">12</div>
+			<div class="col border">13</div>
+		</div>
 		{#each expenses as expense}
 		<div class="row" style="height: 40px">
 			<div class="col-md-3">{expense.location}</div>
@@ -110,8 +127,11 @@
 			</div>
 			<div class="col-md-2"></div>
 			<div class="col-md-4 input-group-sm"><input type="text" class="form-control" placeholder="Tags" on:keypress="{handleEnter}" bind:value="{newNote}"/></div>
+
+			
 			<div class="col-md-1"><button type="button" class="btn btn-success btn-sm" on:click="{addExpense}"><span class="fas fa-plus"></span></button></div>
 		</div>
+		<!-- error alert -->
 		<div class="row">
 			<div class="col-md-5">
 			{#if (error != "") }
@@ -122,26 +142,53 @@
 			</div>
 		</div>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
 	Launch demo modal
 </button>
-
-<!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+				<h5 class="modal-title" id="exampleModalLabel">Tags</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
 				{#each tags as tag}
-				<span class="badge {tag.color}">{tag.name}</span><br />
+				<div class="alert alert-{tag.color}" role="alert">
+					{tag.name}
+				</div>
 				{/each}
 			</div>
 		</div>
 	</div>
+</div> -->
+
+
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+  Button with data-bs-target
+</button>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div>
+      Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+    </div>
+    <div class="dropdown mt-3">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
+        Dropdown button
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <li><a class="dropdown-item" href="/#">Action</a></li>
+        <li><a class="dropdown-item" href="/#">Another action</a></li>
+        <li><a class="dropdown-item" href="/#">Something else here</a></li>
+      </ul>
+    </div>
+  </div>
 </div>
 	</div>
 </main>
@@ -149,5 +196,10 @@
 <style>
 .navbar {
 	margin-bottom: 15px;
+}
+@media only screen and (max-width: 600px) {
+  main {
+    background-color: lightblue;
+  }
 }
 </style>
