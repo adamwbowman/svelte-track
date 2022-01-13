@@ -5,10 +5,13 @@
 	
 	// initial collection
 	let expenses = [];
+	let tags = [];
 
 	// firestore vars
 	const expensesCol = collection(db, 'expenses');
 	const queryAll = query(expensesCol, orderBy("createdAt", "asc"));
+	const tagsCol = collection(db, 'tags');
+	const queryAllTags = query(tagsCol, orderBy("name", "asc"));
 
 	// listener for collection reactivity
 	const listenCol = onSnapshot(queryAll, (querySnapshot) => {
@@ -17,13 +20,19 @@
 			});
 			console.table(expenses);
 	});
+	const listenColTags = onSnapshot(queryAllTags, (querySnapshot) => {
+			tags = querySnapshot.docs.map(doc => {
+				return { id: doc.id, ...doc.data() }
+			});
+			console.table(tags);
+	});
 
 	// page vars
 	const Total = parseInt(500);
 	let subTotal = parseInt(0);
 
 	// form vas
-	let newLocation = "", newAmount = "", newNote="";
+	let newLocation = "", newAmount = "", newNote = "";
 	let error = "";
 
 	// functions
@@ -106,12 +115,34 @@
 		<div class="row">
 			<div class="col-md-5">
 			{#if (error != "") }
-			<div class="alert alert-danger" role="alert">
-				{error}
-			</div>
+				<div class="alert alert-danger" role="alert">
+					<span class="fas fa-exclamation-circle"></span> {error}
+				</div>
 			{/if}
 			</div>
 		</div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+	Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				{#each tags as tag}
+				<span class="badge {tag.color}">{tag.name}</span><br />
+				{/each}
+			</div>
+		</div>
+	</div>
+</div>
 	</div>
 </main>
 
