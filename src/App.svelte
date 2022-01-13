@@ -76,6 +76,10 @@
 			addExpense();
 		}
 	}
+
+	function init(el) {
+		el.focus()
+	}
 </script>
 
 <main>
@@ -89,44 +93,61 @@
 		<div class="row">
 			<div class="col mb-3">
 					<label for="exampleLocation" class="form-label">Location</label>
-					<input type="type" class="form-control" id="exampleLocation">
+					<input type="type" class="form-control" id="exampleLocation" use:init />
 			</div>
 		</div>
 		<div class="row">
 			<div class="col mb-3">
 					<label for="exampleAmount" class="form-label">Amount</label>
-					<input type="number" class="form-control" id="exampleAmount">
+					<input type="number" class="form-control" id="exampleAmount" />
 			</div>
 		</div>
 		<div class="row">
-			<div class="col">
+			<div class="col mb-5">
 				<label for="exampleTag" class="form-label">Tag</label>
 				<div class="btn-group d-flex" role="group" aria-label="Tag Button Group">
-					<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-					<label class="btn btn-outline-secondary" for="btnradio1">Radio 1</label>
+					<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked />
+					<label class="btn btn-outline-secondary" for="btnradio1"><span class="fas fa-shopping-cart"></span></label>
 				
-					<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-					<label class="btn btn-outline-secondary" for="btnradio2">Radio 2</label>
+					<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" />
+					<label class="btn btn-outline-secondary" for="btnradio2"><span class="fas fa-home"></span></label>
 				
-					<input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-					<label class="btn btn-outline-secondary" for="btnradio3">Radio 3</label>
+					<input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" />
+					<label class="btn btn-outline-secondary" for="btnradio3"><span class="fas fa-utensils"></span></label>
+					
+					<input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" />
+					<label class="btn btn-outline-secondary" for="btnradio3"><span class="fab fa-amazon"></span></label>
+					
+					<input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" />
+					<label class="btn btn-outline-secondary" for="btnradio3"><span class="fas fa-subway"></span></label>
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col"><br /><br />
+		<div class="row border">
+			<div class="col mb-5">
 				<!-- <label for="exampleTag" class="form-label">Button</label> -->
-				<button type="button" class="btn btn-success" style="width: 100%">Success</button>
+				<button type="button" class="btn btn-success" style="width: 100%">Add</button>
 			</div>
 		</div>
+		<div class="row mb-1 border">
+			<div class="col col-sm-4">Location</div>
+			<div class="col col-sm-3">Amount</div>
+			<div class="col col-sm-3">SubTotal</div>
+			<div class="col col-sm-1"><button type="button" class="btn btn-info btn-sm"><span class="fas fa-shopping-cart"></span></button></div>
+			<div class="col col-sm-1"><button type="button" class="btn btn-success btn-sm"><span class="fas fa-plus"></span></button></div>
+ 		</div>
+		 <div class="row mb-1 border">
+			<div class="col col-sm-4">Target</div>
+			<div class="col col-sm-3">(123.45)</div>
+			<div class="col col-sm-3">$ 456.78</div>
+			<div class="col col-sm-1"><button type="button" class="btn btn-info btn-sm"><span class="fas fa-shopping-cart"></span></button></div>
+			<div class="col col-sm-1"><button type="button" class="btn btn-success btn-sm"><span class="fas fa-plus"></span></button></div>
+ 		</div>
 	</div>
 
 
 
 
-
-
-<br /><br /><br /><br /><br /><br /><br />
 
 
 
