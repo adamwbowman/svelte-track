@@ -90,18 +90,9 @@
 	</nav>
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-4 mb-2">
-					<label for="exampleLocation" class="form-label">Location</label>
-					<input type="type" class="form-control" id="exampleLocation" use:init />
-			</div>
 
-			<div class="col-sm-2 mb-2">
-					<label for="exampleAmount" class="form-label">Amount</label>
-					<input type="number" class="form-control" id="exampleAmount" />
-			</div>
-
-			<div class="col-sm-2 mb-2">
-				<label for="exampleTag" class="form-label">Tag</label>
+			<div class="col-sm-2 mb-4">
+				<!-- <label for="exampleTag" class="form-label">&nbsp;</label> -->
 				<div class="btn-group d-flex" role="group" aria-label="Tag Button Group">
 					<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked />
 					<label class="btn btn-outline-secondary" for="btnradio1"><span class="fas fa-shopping-cart"></span></label>
@@ -119,45 +110,57 @@
 					<label class="btn btn-outline-secondary" for="btnradio3"><span class="fas fa-subway"></span></label>
 				</div>
 			</div>
+
+			<div class="col-sm-4 mb-4">
+					<!-- <label for="exampleLocation" class="form-label">Location</label> -->
+					<input type="type" class="form-control" id="exampleLocation" placeholder="Location" use:init />
+			</div>
+
+			<div class="col-sm-2 mb-4">
+					<!-- <label for="exampleAmount" class="form-label">Amount</label> -->
+					<input type="number" class="form-control" id="exampleAmount" placeholder="Amount" />
+			</div>
+
+
 			<div class="col-sm-2 mb-5">
-				<label for="exampleAction" class="form-label">&nbsp;</label>
+				<!-- <label for="exampleAction" class="form-label">&nbsp;</label> -->
 				<button type="button" class="btn btn-success" style="width: 100%">Add</button>
 			</div>
 		</div>
 		<div class="row mx-1 mb-2">
-		<div class="col">Target</div>
+			<div class="col-1"><button type="button" class="btn btn-primary btn-sm"><span class="fas fa-shopping-cart"></span></button></div>
+			<div class="col">Target</div>
 			<div class="col-2">(23.23)</div>
 			<div class="col-2">$432.32</div>
-			<div class="col-1"><button type="button" class="btn btn-primary btn-sm"><span class="fas fa-shopping-cart"></span></button></div>
-			<div class="col-1"><button type="button" class="btn btn-secondary btn-sm"><span class="fas fa-trash"></span></button></div>
- 		</div>
+			<div class="col-1 d-none d-md-block"><button type="button" class="btn btn-secondary btn-sm"><span class="fas fa-trash"></span></button></div>
+		</div>
 		 <div class="row mx-1 mb-2">
+			<div class="col-1"><button type="button" class="btn btn-danger btn-sm"><span class="fas fa-home"></span></button></div>
 			<div class="col">Home Depot</div>
 			<div class="col-2">(23.23)</div>
 			<div class="col-2">$432.32</div>
-			<div class="col-1"><button type="button" class="btn btn-danger btn-sm"><span class="fas fa-home"></span></button></div>
-			<div class="col-1"><button type="button" class="btn btn-secondary btn-sm"><span class="fas fa-trash"></span></button></div>
+			<div class="col-1 d-none d-md-block"><button type="button" class="btn btn-secondary btn-sm"><span class="fas fa-trash"></span></button></div>
  		</div>
 		 <div class="row mx-1 mb-2">
+			<div class="col-1"><button type="button" class="btn btn-warning btn-sm"><span class="fab fa-amazon"></span></button></div>
 			<div class="col">Dresser Place</div>
 			<div class="col-2">(23.23)</div>
 			<div class="col-2">$432.32</div>
-			<div class="col-1"><button type="button" class="btn btn-warning btn-sm"><span class="fab fa-amazon"></span></button></div>
-			<div class="col-1"><button type="button" class="btn btn-secondary btn-sm"><span class="fas fa-trash"></span></button></div>
+			<div class="col-1 d-none d-md-block"><button type="button" class="btn btn-secondary btn-sm"><span class="fas fa-trash"></span></button></div>
  		</div>
 		 <div class="row mx-1 mb-2">
-			<div class="col">Taco Bell</div>
+			<div class="col-1"><button type="button" class="btn btn-info btn-sm"><span class="fas fa-utensils"></span></button></div>
+			<div class="col">El Limon</div>
 			<div class="col-2">(23.23)</div>
 			<div class="col-2">$432.32</div>
-			<div class="col-1"><button type="button" class="btn btn-info btn-sm"><span class="fas fa-utensils"></span></button></div>
-			<div class="col-1"><button type="button" class="btn btn-secondary btn-sm"><span class="fas fa-trash"></span></button></div>
+			<div class="col-1 d-none d-md-block"><button type="button" class="btn btn-secondary btn-sm"><span class="fas fa-trash"></span></button></div>
  		</div>
 		 <div class="row mx-1 mb-2">
+			<div class="col-1"><button type="button" class="btn btn-dark btn-sm"><span class="fas fa-subway"></span></button></div>
 			<div class="col">Ventra</div>
 			<div class="col-2">(23.23)</div>
 			<div class="col-2">$432.32</div>
-			<div class="col-1"><button type="button" class="btn btn-dark btn-sm"><span class="fas fa-subway"></span></button></div>
-			<div class="col-1"><button type="button" class="btn btn-secondary btn-sm"><span class="fas fa-trash"></span></button></div>
+			<div class="col-1 d-none d-md-block"><button type="button" class="btn btn-secondary btn-sm"><span class="fas fa-trash"></span></button></div>
  		</div>
 	</div>
 
