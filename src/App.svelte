@@ -83,94 +83,80 @@
 </script>
 
 <main>
+	<!-- navbar -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid mb-0 h1">
 			<a class="navbar-brand" href="#/">${Total}</a>
 		</div>
 	</nav>
 	<div class="container">
+		<!-- button group -->
 		<div class="row">
-
 			<div class="col-sm-2 mb-4">
-				<!-- <label for="exampleTag" class="form-label">&nbsp;</label> -->
 				<div class="btn-group d-flex" role="group" aria-label="Tag Button Group">
 					<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked />
 					<label class="btn btn-outline-secondary" for="btnradio1"><span class="fas fa-shopping-cart"></span></label>
-				
 					<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" />
 					<label class="btn btn-outline-secondary" for="btnradio2"><span class="fas fa-home"></span></label>
-				
 					<input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" />
 					<label class="btn btn-outline-secondary" for="btnradio3"><span class="fas fa-utensils"></span></label>
-					
 					<input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" />
 					<label class="btn btn-outline-secondary" for="btnradio3"><span class="fab fa-amazon"></span></label>
-					
 					<input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" />
 					<label class="btn btn-outline-secondary" for="btnradio3"><span class="fas fa-subway"></span></label>
 				</div>
 			</div>
-
+			<!-- location -->
 			<div class="col-sm-4 mb-4">
-					<!-- <label for="exampleLocation" class="form-label">Location</label> -->
 					<input type="type" class="form-control" id="exampleLocation" placeholder="Location" use:init />
 			</div>
-
+			<!-- amount -->
 			<div class="col-sm-2 mb-4">
-					<!-- <label for="exampleAmount" class="form-label">Amount</label> -->
 					<input type="number" class="form-control" id="exampleAmount" placeholder="Amount" />
 			</div>
-
-
+			<!-- add button -->
 			<div class="col-sm-2 mb-5">
-				<!-- <label for="exampleAction" class="form-label">&nbsp;</label> -->
 				<button type="button" class="btn btn-success" style="width: 100%">Add</button>
 			</div>
 		</div>
+		<!-- journal -->
 		<div class="row mx-1 mb-2">
 			<div class="col-1"><button type="button" class="btn btn-primary btn-sm"><span class="fas fa-shopping-cart"></span></button></div>
 			<div class="col">Target</div>
 			<div class="col-2">(23.23)</div>
 			<div class="col-2">$432.32</div>
-			<div class="col-1 d-none d-md-block"><button type="button" class="btn btn-secondary btn-sm"><span class="fas fa-trash"></span></button></div>
+			<div class="col-1 d-none d-sm-block"><button type="button" class="btn btn-secondary btn-sm"><span class="fas fa-trash"></span></button></div>
 		</div>
 		 <div class="row mx-1 mb-2">
 			<div class="col-1"><button type="button" class="btn btn-danger btn-sm"><span class="fas fa-home"></span></button></div>
 			<div class="col">Home Depot</div>
 			<div class="col-2">(23.23)</div>
 			<div class="col-2">$432.32</div>
-			<div class="col-1 d-none d-md-block"><button type="button" class="btn btn-secondary btn-sm"><span class="fas fa-trash"></span></button></div>
+			<div class="col-1 d-none d-sm-block"><button type="button" class="btn btn-secondary btn-sm"><span class="fas fa-trash"></span></button></div>
  		</div>
 		 <div class="row mx-1 mb-2">
 			<div class="col-1"><button type="button" class="btn btn-warning btn-sm"><span class="fab fa-amazon"></span></button></div>
 			<div class="col">Dresser Place</div>
 			<div class="col-2">(23.23)</div>
 			<div class="col-2">$432.32</div>
-			<div class="col-1 d-none d-md-block"><button type="button" class="btn btn-secondary btn-sm"><span class="fas fa-trash"></span></button></div>
+			<div class="col-1 d-none d-sm-block"><button type="button" class="btn btn-secondary btn-sm"><span class="fas fa-trash"></span></button></div>
  		</div>
 		 <div class="row mx-1 mb-2">
 			<div class="col-1"><button type="button" class="btn btn-info btn-sm"><span class="fas fa-utensils"></span></button></div>
 			<div class="col">El Limon</div>
 			<div class="col-2">(23.23)</div>
 			<div class="col-2">$432.32</div>
-			<div class="col-1 d-none d-md-block"><button type="button" class="btn btn-secondary btn-sm"><span class="fas fa-trash"></span></button></div>
+			<div class="col-1 d-none d-sm-block"><button type="button" class="btn btn-secondary btn-sm"><span class="fas fa-trash"></span></button></div>
  		</div>
 		 <div class="row mx-1 mb-2">
 			<div class="col-1"><button type="button" class="btn btn-dark btn-sm"><span class="fas fa-subway"></span></button></div>
 			<div class="col">Ventra</div>
 			<div class="col-2">(23.23)</div>
 			<div class="col-2">$432.32</div>
-			<div class="col-1 d-none d-md-block"><button type="button" class="btn btn-secondary btn-sm"><span class="fas fa-trash"></span></button></div>
+			<div class="col-1 d-none d-sm-block"><button type="button" class="btn btn-secondary btn-sm"><span class="fas fa-trash"></span></button></div>
  		</div>
+		<!-- footer -->
 	</div>
-
-
-
-
-
-
-
-
 
 
 
@@ -219,14 +205,19 @@
 .navbar {
 	margin-bottom: 15px;
 }
-/* .container {
-	margin-left: 50px;
-	margin-right: 50px;
-} */
 @media only screen and (max-width: 576px) {
 	main {
 		background-color: lightblue;
 	}
 }
-
+@media (min-width: 577px) and (max-width: 768px) {
+	main {
+		background-color: rgb(243, 124, 124);
+	}
+}
+@media (min-width: 769px) and (max-width: 1600px) {
+	main {
+		background-color: rgb(140, 245, 140);
+	}
+}
 </style>
