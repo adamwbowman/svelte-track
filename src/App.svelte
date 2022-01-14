@@ -139,7 +139,7 @@
 		 <div class="row mb-1 border">
 			<div class="col col-sm-4">Target</div>
 			<div class="col col-sm-3">(123.45)</div>
-			<div class="col col-sm-3">$ 456.78</div>
+			<div class="col col-sm-3">$456.78</div>
 			<div class="col col-sm-1"><button type="button" class="btn btn-info btn-sm"><span class="fas fa-shopping-cart"></span></button></div>
 			<div class="col col-sm-1"><button type="button" class="btn btn-success btn-sm"><span class="fas fa-plus"></span></button></div>
  		</div>
