@@ -95,15 +95,20 @@
 			<div class="col-sm-2 mb-4">
 				<div class="btn-group d-flex" role="group" aria-label="Tag Button Group">
 					<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked />
-					<label class="btn btn-outline-secondary" for="btnradio1"><span class="fas fa-shopping-cart"></span></label>
+					<!-- <label class="btn btn-outline-secondary" for="btnradio1"><span class="fas fa-shopping-cart"></span></label> -->
+					<label class="btn btn-outline-secondary" for="btnradio1"><ion-icon name="cart"></ion-icon></label>
+					<!-- <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" /> -->
 					<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" />
-					<label class="btn btn-outline-secondary" for="btnradio2"><span class="fas fa-home"></span></label>
+					<label class="btn btn-outline-secondary" for="btnradio2"><ion-icon name="home"></ion-icon></label>
+					<!-- <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" /> -->
 					<input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" />
-					<label class="btn btn-outline-secondary" for="btnradio3"><span class="fas fa-utensils"></span></label>
+					<label class="btn btn-outline-secondary" for="btnradio3"><ion-icon name="restaurant"></ion-icon></label>
+					<!-- <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" /> -->
 					<input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" />
-					<label class="btn btn-outline-secondary" for="btnradio3"><span class="fab fa-amazon"></span></label>
+					<label class="btn btn-outline-secondary" for="btnradio3"><ion-icon name="logo-amazon"></ion-icon></label>
+					<!-- <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" /> -->
 					<input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" />
-					<label class="btn btn-outline-secondary" for="btnradio3"><span class="fas fa-subway"></span></label>
+					<label class="btn btn-outline-secondary" for="btnradio3"><ion-icon name="subway"></ion-icon></label>
 				</div>
 			</div>
 			<!-- location -->
@@ -121,39 +126,39 @@
 		</div>
 		<!-- journal -->
 		<div class="row mx-1 mb-2">
-			<div class="col-1"><button type="button" class="btn btn-primary btn-sm"><span class="fas fa-shopping-cart"></span></button></div>
+			<div class="col-1"><button type="button" class="btn btn-primary btn-sm"><ion-icon name="cart"></ion-icon></button></div>
 			<div class="col">Target</div>
 			<div class="col-2">(23.23)</div>
 			<div class="col-2">$432.32</div>
-			<div class="col-1 d-none d-sm-block"><button type="button" class="btn btn-secondary btn-sm"><span class="fas fa-trash"></span></button></div>
+			<div class="col-1 d-none d-sm-block"><button type="button" class="btn btn-secondary btn-sm"><ion-icon name="trash"></ion-icon></button></div>
 		</div>
 		 <div class="row mx-1 mb-2">
-			<div class="col-1"><button type="button" class="btn btn-danger btn-sm"><span class="fas fa-home"></span></button></div>
+			<div class="col-1"><button type="button" class="btn btn-danger btn-sm"><ion-icon name="home"></ion-icon></button></div>
 			<div class="col">Home Depot</div>
 			<div class="col-2">(23.23)</div>
 			<div class="col-2">$432.32</div>
-			<div class="col-1 d-none d-sm-block"><button type="button" class="btn btn-secondary btn-sm"><span class="fas fa-trash"></span></button></div>
+			<div class="col-1 d-none d-sm-block"><button type="button" class="btn btn-secondary btn-sm"><ion-icon name="trash"></ion-icon></button></div>
  		</div>
 		 <div class="row mx-1 mb-2">
-			<div class="col-1"><button type="button" class="btn btn-warning btn-sm"><span class="fab fa-amazon"></span></button></div>
+			<div class="col-1"><button type="button" class="btn btn-warning btn-sm"><ion-icon name="logo-amazon"></ion-icon></button></div>
 			<div class="col">Dresser Place</div>
 			<div class="col-2">(23.23)</div>
 			<div class="col-2">$432.32</div>
-			<div class="col-1 d-none d-sm-block"><button type="button" class="btn btn-secondary btn-sm"><span class="fas fa-trash"></span></button></div>
+			<div class="col-1 d-none d-sm-block"><button type="button" class="btn btn-secondary btn-sm"><ion-icon name="trash"></ion-icon></button></div>
  		</div>
 		 <div class="row mx-1 mb-2">
-			<div class="col-1"><button type="button" class="btn btn-info btn-sm"><span class="fas fa-utensils"></span></button></div>
+			<div class="col-1"><button type="button" class="btn btn-info btn-sm"><ion-icon name="restaurant"></ion-icon></button></div>
 			<div class="col">El Limon</div>
 			<div class="col-2">(23.23)</div>
 			<div class="col-2">$432.32</div>
-			<div class="col-1 d-none d-sm-block"><button type="button" class="btn btn-secondary btn-sm"><span class="fas fa-trash"></span></button></div>
+			<div class="col-1 d-none d-sm-block"><button type="button" class="btn btn-secondary btn-sm"><ion-icon name="trash"></ion-icon></button></div>
  		</div>
 		 <div class="row mx-1 mb-2">
-			<div class="col-1"><button type="button" class="btn btn-dark btn-sm"><span class="fas fa-subway"></span></button></div>
+			<div class="col-1"><button type="button" class="btn btn-dark btn-sm"><ion-icon name="subway"></ion-icon></button></div>
 			<div class="col">Ventra</div>
 			<div class="col-2">(23.23)</div>
 			<div class="col-2">$432.32</div>
-			<div class="col-1 d-none d-sm-block"><button type="button" class="btn btn-secondary btn-sm"><span class="fas fa-trash"></span></button></div>
+			<div class="col-1 d-none d-sm-block"><button type="button" class="btn btn-secondary btn-sm"><ion-icon name="trash"></ion-icon></button></div>
  		</div>
 		<!-- footer -->
 	</div>
