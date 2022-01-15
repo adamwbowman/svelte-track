@@ -91,8 +91,8 @@
 	</nav>
 	<div class="container">
 		<!-- button group -->
-		<div class="row border justify-content-center">
-			<div class="col-lg-4 border mb-3">
+		<div class="row justify-content-center">
+			<div class="col-lg-4 mb-3">
 				<div class="btn-group d-flex" role="group" aria-label="Tag Button Group">
 					<!-- grocery button -->
 					<input type="radio" class="btn-check" name="btnradio" id="btnradioGrocery" autocomplete="off" checked />
@@ -115,26 +115,26 @@
 				</div>
 			</div>
 			<!-- location -->
-			<div class="col-md-4 col-lg-4 border mb-3">
+			<div class="col-md-4 col-lg-4 mb-3">
 					<input type="type" class="form-control" id="exampleLocation" placeholder="Location" use:init />
 			</div>
 			<!-- amount -->
-			<div class="col-md-3 col-lg-2 border mb-3">
+			<div class="col-md-3 col-lg-2 mb-3">
 					<input type="number" class="form-control" id="exampleAmount" placeholder="Amount" />
 			</div>
 			<!-- add button -->
-			<div class="col-md-2 border mb-3">
+			<div class="col-md-2 mb-3">
 				<button type="button" class="btn btn-success" style="width: 100%">Add</button>
 			</div>
 		</div>
 		<!-- journal -->
-		<div class="row border mb-2">
+		<div class="row mb-2">
 			<div class="col-1 col-lg-3"></div>
-			<div class="col-1 border"><button type="button" class="btn btn-primary btn-sm"><ion-icon name="cart"></ion-icon></button></div>
-			<div class="col-5 col-lg-3 border">Target</div>
-			<div class="col-2 col-lg-1 border">(23.23)</div>
-			<div class="col-2 col-lg-1 border"><p class="text-secondary">$-432.32</p></div>
-			<div class="col-1 border d-none d-md-block"><button type="button" class="btn btn-secondary btn-sm"><ion-icon name="trash"></ion-icon></button></div>
+			<div class="col-1"><button type="button" class="btn btn-primary btn-sm"><ion-icon name="cart"></ion-icon></button></div>
+			<div class="col-5 col-lg-3">Target</div>
+			<div class="col-2 col-lg-1">(23.23)</div>
+			<div class="col-2 col-lg-1"><p class="text-secondary">$-432.32</p></div>
+			<div class="col-1 d-none d-md-block"><button type="button" class="btn btn-secondary btn-sm"><ion-icon name="trash"></ion-icon></button></div>
 		</div>
 		<!-- footer -->
 	</div>
