@@ -116,11 +116,21 @@
 			</div>
 			<!-- location -->
 			<div class="col-md-4 col-lg-4 mb-3">
-					<input type="type" class="form-control" id="exampleLocation" placeholder="Location" use:init />
+					<input type="type" class="form-control" id="exampleLocation" placeholder="Location" 
+						on:keypress="{handleEnter}" 
+						bind:value="{newLocation}" 
+						use:init 
+					/>
 			</div>
 			<!-- amount -->
 			<div class="col-md-3 col-lg-2 mb-3">
-					<input type="number" class="form-control" id="exampleAmount" placeholder="Amount" />
+				<div class="input-group">
+					<span class="input-group-text">$</span>
+					<input type="number" class="form-control" id="exampleAmount" placeholder="Amount" 
+						on:keypress="{handleEnter}" 
+						bind:value="{newAmount}"
+					/>
+				</div>
 			</div>
 			<!-- add button -->
 			<div class="col-md-2 mb-5">
@@ -128,6 +138,27 @@
 			</div>
 		</div>
 		<!-- journal -->
+		{#each expenses as expense}
+		<div class="row">
+			<div class="col-1 col-lg-3"></div>
+			<!-- tag -->
+			<div class="col-1">
+					<button type="button" class="btn btn-{expense.tagColor} btn-sm">
+							<ion-icon name="{expense.tag}"></ion-icon>
+					</button>
+				</div>
+			<div class="col-5 col-lg-3">{expense.location}</div>
+			<div class="col-2 col-lg-1">({expense.amount})</div>
+			<div class="col-2 col-lg-1"><p class="text-secondary">{getSubTotal(expense.amount)}</p></div>
+			<!-- delete button -->
+			<div class="col-1 d-none d-md-block">
+				<button type="button" class="btn btn-secondary btn-sm" 
+					on:click="{deleteExpense(expense.id)}">
+						<ion-icon name="trash"></ion-icon>
+				</button>
+			</div>
+		</div>
+		{/each}
 		<div class="row">
 			<div class="col-1 col-lg-3"></div>
 			<div class="col-1"><button type="button" class="btn btn-secondary btn-sm"><ion-icon name="cart"></ion-icon></button></div>
@@ -152,10 +183,14 @@
 			<div class="col-2 col-lg-1"><p class="text-secondary">$-432.32</p></div>
 			<div class="col-1 d-none d-md-block"><button type="button" class="btn btn-secondary btn-sm"><ion-icon name="trash"></ion-icon></button></div>
 		</div>
-		<!-- footer -->
 	</div>
 
-<!-- 
+
+
+
+
+
+<!--
 	<div class="container">
 		<div class="row">
 			<div class="col-12 col-md-3 input-group-sm"><input type="text" class="form-control" placeholder="Location" on:keypress="{handleEnter}" bind:value="{newLocation}"/></div>
