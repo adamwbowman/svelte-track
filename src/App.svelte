@@ -95,23 +95,23 @@
 			<div class="col-lg-4 mb-3">
 				<div class="btn-group d-flex" role="group" aria-label="Tag Button Group">
 					<!-- grocery button -->
-					<input type="radio" class="btn-check" name="btnradio" id="btnradioGrocery" autocomplete="off" checked />
-					<label class="btn btn-outline-secondary" for="btnradioGrocery"><ion-icon name="cart"></ion-icon></label>
-					<!-- home button -->
-					<input type="radio" class="btn-check" name="btnradio" id="btnradioHome" autocomplete="off" />
-					<label class="btn btn-outline-secondary" for="btnradioHome"><ion-icon name="home"></ion-icon></label>
-					<!-- restaurant button -->
-					<input type="radio" class="btn-check" name="btnradio" id="btnradioRestaurant" autocomplete="off" />
-					<label class="btn btn-outline-secondary" for="btnradioRestaurant"><ion-icon name="restaurant"></ion-icon></label>
-					<!-- clothes button -->
-					<input type="radio" class="btn-check" name="btnradio" id="btnradioClothes" autocomplete="off" />
-					<label class="btn btn-outline-secondary" for="btnradioClothes"><ion-icon name="shirt"></ion-icon></label>
+					<input type="radio" class="btn-check" name="btncheck" id="btncheckGrocery" autocomplete="off" checked />
+					<label class="btn btn-outline-secondary" for="btncheckGrocery"><ion-icon name="cart"></ion-icon></label>
 					<!-- amazon button -->
-					<input type="radio" class="btn-check" name="btnradio" id="btnradioAmazon" autocomplete="off" />
-					<label class="btn btn-outline-secondary" for="btnradioAmazon"><ion-icon name="logo-amazon"></ion-icon></label>
+					<input type="radio" class="btn-check" name="btncheck" id="btncheckAmazon" autocomplete="off" />
+					<label class="btn btn-outline-warning" for="btncheckAmazon"><ion-icon name="logo-amazon"></ion-icon></label>
+					<!-- home button -->
+					<input type="radio" class="btn-check" name="btncheck" id="btncheckHome" autocomplete="off" />
+					<label class="btn btn-outline-primary" for="btncheckHome"><ion-icon name="home"></ion-icon></label>
+					<!-- restaurant button -->
+					<input type="radio" class="btn-check" name="btncheck" id="btncheckRestaurant" autocomplete="off" />
+					<label class="btn btn-outline-danger" for="btncheckRestaurant"><ion-icon name="restaurant"></ion-icon></label>
 					<!-- transit button -->
-					<input type="radio" class="btn-check" name="btnradio" id="btnradioTransit" autocomplete="off" />
-					<label class="btn btn-outline-secondary" for="btnradioTransit"><ion-icon name="subway"></ion-icon></label>
+					<input type="radio" class="btn-check" name="btncheck" id="btncheckTransit" autocomplete="off" />
+					<label class="btn btn-outline-info" for="btncheckTransit"><ion-icon name="subway"></ion-icon></label>
+					<!-- clothes button -->
+					<input type="radio" class="btn-check" name="btncheck" id="btncheckClothes" autocomplete="off" />
+					<label class="btn btn-outline-dark" for="btncheckClothes"><ion-icon name="shirt"></ion-icon></label>
 				</div>
 			</div>
 			<!-- location -->
@@ -123,15 +123,31 @@
 					<input type="number" class="form-control" id="exampleAmount" placeholder="Amount" />
 			</div>
 			<!-- add button -->
-			<div class="col-md-2 mb-3">
+			<div class="col-md-2 mb-5">
 				<button type="button" class="btn btn-success" style="width: 100%">Add</button>
 			</div>
 		</div>
 		<!-- journal -->
-		<div class="row mb-2">
+		<div class="row">
 			<div class="col-1 col-lg-3"></div>
-			<div class="col-1"><button type="button" class="btn btn-primary btn-sm"><ion-icon name="cart"></ion-icon></button></div>
+			<div class="col-1"><button type="button" class="btn btn-secondary btn-sm"><ion-icon name="cart"></ion-icon></button></div>
+			<div class="col-5 col-lg-3">Whole Foods</div>
+			<div class="col-2 col-lg-1">(23.23)</div>
+			<div class="col-2 col-lg-1"><p class="text-secondary">$-432.32</p></div>
+			<div class="col-1 d-none d-md-block"><button type="button" class="btn btn-secondary btn-sm"><ion-icon name="trash"></ion-icon></button></div>
+		</div>
+		<div class="row">
+			<div class="col-1 col-lg-3"></div>
+			<div class="col-1"><button type="button" class="btn btn-primary btn-sm"><ion-icon name="home"></ion-icon></button></div>
 			<div class="col-5 col-lg-3">Target</div>
+			<div class="col-2 col-lg-1">(23.23)</div>
+			<div class="col-2 col-lg-1"><p class="text-secondary">$-432.32</p></div>
+			<div class="col-1 d-none d-md-block"><button type="button" class="btn btn-secondary btn-sm"><ion-icon name="trash"></ion-icon></button></div>
+		</div>
+		<div class="row">
+			<div class="col-1 col-lg-3"></div>
+			<div class="col-1"><button type="button" class="btn btn-warning btn-sm"><ion-icon name="logo-amazon"></ion-icon></button></div>
+			<div class="col-5 col-lg-3">Art Supplies</div>
 			<div class="col-2 col-lg-1">(23.23)</div>
 			<div class="col-2 col-lg-1"><p class="text-secondary">$-432.32</p></div>
 			<div class="col-1 d-none d-md-block"><button type="button" class="btn btn-secondary btn-sm"><ion-icon name="trash"></ion-icon></button></div>
@@ -139,17 +155,7 @@
 		<!-- footer -->
 	</div>
 
-
-
 <!-- 
-
-col-sm-2 col-lg-3
-btn-group d-flex
-col-sm-4 col-lg-3
-col-sm-2 col-lg-2
-col-sm-2
-
-
 	<div class="container">
 		<div class="row">
 			<div class="col-12 col-md-3 input-group-sm"><input type="text" class="form-control" placeholder="Location" on:keypress="{handleEnter}" bind:value="{newLocation}"/></div>
