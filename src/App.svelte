@@ -139,19 +139,19 @@
 		</div>
 		<!-- journal -->
 		{#each expenses as expense}
-		<div class="row">
-			<div class="col-1 col-lg-3"></div>
+		<div class="row gx-3 border">
+			<div class="col-1 border col-lg-3"></div>
 			<!-- tag -->
-			<div class="col-1">
+			<div class="col-1  pull-left border">
 					<button type="button" class="btn btn-{expense.tagColor} btn-sm">
 							<ion-icon name="{expense.tag}"></ion-icon>
 					</button>
 				</div>
-			<div class="col-5 col-lg-3">{expense.location}</div>
-			<div class="col-2 col-lg-1">({expense.amount})</div>
-			<div class="col-2 col-lg-1"><p class="text-secondary">{getSubTotal(expense.amount)}</p></div>
+			<div class="col-5 border col-lg-3"><p class="ps-2 p-md-0">{expense.location}</p></div>
+			<div class="col-2 border col-lg-1"><p class="text-end">({expense.amount})</p></div>
+			<div class="col-2 border col-lg-1"><p class="text-secondary text-end">{getSubTotal(expense.amount)}</p></div>
 			<!-- delete button -->
-			<div class="col-1 d-none d-md-block">
+			<div class="col-1 border d-none d-md-block">
 				<button type="button" class="btn btn-secondary btn-sm" 
 					on:click="{deleteExpense(expense.id)}">
 						<ion-icon name="trash"></ion-icon>
@@ -159,30 +159,6 @@
 			</div>
 		</div>
 		{/each}
-		<div class="row">
-			<div class="col-1 col-lg-3"></div>
-			<div class="col-1"><button type="button" class="btn btn-secondary btn-sm"><ion-icon name="cart"></ion-icon></button></div>
-			<div class="col-5 col-lg-3">Whole Foods</div>
-			<div class="col-2 col-lg-1">(23.23)</div>
-			<div class="col-2 col-lg-1"><p class="text-secondary">$-432.32</p></div>
-			<div class="col-1 d-none d-md-block"><button type="button" class="btn btn-secondary btn-sm"><ion-icon name="trash"></ion-icon></button></div>
-		</div>
-		<div class="row">
-			<div class="col-1 col-lg-3"></div>
-			<div class="col-1"><button type="button" class="btn btn-primary btn-sm"><ion-icon name="home"></ion-icon></button></div>
-			<div class="col-5 col-lg-3">Target</div>
-			<div class="col-2 col-lg-1">(23.23)</div>
-			<div class="col-2 col-lg-1"><p class="text-secondary">$-432.32</p></div>
-			<div class="col-1 d-none d-md-block"><button type="button" class="btn btn-secondary btn-sm"><ion-icon name="trash"></ion-icon></button></div>
-		</div>
-		<div class="row">
-			<div class="col-1 col-lg-3"></div>
-			<div class="col-1"><button type="button" class="btn btn-warning btn-sm"><ion-icon name="logo-amazon"></ion-icon></button></div>
-			<div class="col-5 col-lg-3">Art Supplies</div>
-			<div class="col-2 col-lg-1">(23.23)</div>
-			<div class="col-2 col-lg-1"><p class="text-secondary">$-432.32</p></div>
-			<div class="col-1 d-none d-md-block"><button type="button" class="btn btn-secondary btn-sm"><ion-icon name="trash"></ion-icon></button></div>
-		</div>
 	</div>
 
 
