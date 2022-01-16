@@ -99,19 +99,19 @@
 					<label class="btn btn-outline-secondary" for="btncheckGrocery"><ion-icon name="cart"></ion-icon></label>
 					<!-- amazon button -->
 					<input type="radio" class="btn-check" name="btncheck" id="btncheckAmazon" autocomplete="off" />
-					<label class="btn btn-outline-warning" for="btncheckAmazon"><ion-icon name="logo-amazon"></ion-icon></label>
+					<label class="btn btn-outline-secondary" for="btncheckAmazon"><ion-icon name="logo-amazon"></ion-icon></label>
 					<!-- home button -->
 					<input type="radio" class="btn-check" name="btncheck" id="btncheckHome" autocomplete="off" />
-					<label class="btn btn-outline-primary" for="btncheckHome"><ion-icon name="home"></ion-icon></label>
+					<label class="btn btn-outline-secondary" for="btncheckHome"><ion-icon name="home"></ion-icon></label>
 					<!-- restaurant button -->
 					<input type="radio" class="btn-check" name="btncheck" id="btncheckRestaurant" autocomplete="off" />
-					<label class="btn btn-outline-danger" for="btncheckRestaurant"><ion-icon name="restaurant"></ion-icon></label>
+					<label class="btn btn-outline-secondary" for="btncheckRestaurant"><ion-icon name="restaurant"></ion-icon></label>
 					<!-- transit button -->
 					<input type="radio" class="btn-check" name="btncheck" id="btncheckTransit" autocomplete="off" />
-					<label class="btn btn-outline-info" for="btncheckTransit"><ion-icon name="subway"></ion-icon></label>
+					<label class="btn btn-outline-secondary" for="btncheckTransit"><ion-icon name="subway"></ion-icon></label>
 					<!-- clothes button -->
 					<input type="radio" class="btn-check" name="btncheck" id="btncheckClothes" autocomplete="off" />
-					<label class="btn btn-outline-dark" for="btncheckClothes"><ion-icon name="shirt"></ion-icon></label>
+					<label class="btn btn-outline-secondary" for="btncheckClothes"><ion-icon name="shirt"></ion-icon></label>
 				</div>
 			</div>
 			<!-- location -->
@@ -140,7 +140,7 @@
 		<!-- journal -->
 		{#each expenses as expense}
 		<div class="row gx-3 border">
-			<div class="col-1 border col-lg-3"></div>
+			<div class="col-0 border col-lg-3"></div>
 			<!-- tag -->
 			<div class="col-1  pull-left border">
 					<button type="button" class="btn btn-{expense.tagColor} btn-sm">
@@ -151,7 +151,7 @@
 			<div class="col-2 border col-lg-1 overflow-auto"><p class="text-end">({expense.amount})</p></div>
 			<div class="col-2 border col-lg-1 overflow-auto"><p class="text-secondary text-end">{getSubTotal(expense.amount)}</p></div>
 			<!-- delete button -->
-			<div class="col-0 border d-none d-md-block">
+			<div class="col-1 border d-none d-md-block">
 				<button type="button" class="btn btn-secondary btn-sm" 
 					on:click="{deleteExpense(expense.id)}">
 						<ion-icon name="trash"></ion-icon>
