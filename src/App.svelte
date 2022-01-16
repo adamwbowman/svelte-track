@@ -148,7 +148,7 @@
 					</button>
 				</div>
 			<div class="col-5 border col-lg-3"><p class="ps-2 p-md-0">{expense.location}</p></div>
-			<div class="col-2 border col-lg-1 overflow-auto"><p class="text-end">({expense.amount})</p></div>
+			<div class="col-3 border col-lg-1 overflow-auto"><p class="text-end">({expense.amount})</p></div>
 			<div class="col-2 border col-lg-1 overflow-auto"><p class="text-secondary text-end">{getSubTotal(expense.amount)}</p></div>
 			<!-- delete button -->
 			<div class="col-0 border d-none d-md-block">
