@@ -148,10 +148,10 @@
 					</button>
 				</div>
 			<div class="col-5 border col-lg-3"><p class="ps-2 p-md-0">{expense.location}</p></div>
-			<div class="col-2 border col-lg-1"><p class="text-end">({expense.amount})</p></div>
-			<div class="col-2 border col-lg-1"><p class="text-secondary text-end">{getSubTotal(expense.amount)}</p></div>
+			<div class="col-2 border col-lg-1 overflow-auto"><p class="text-end">({expense.amount})</p></div>
+			<div class="col-2 border col-lg-1 overflow-auto"><p class="text-secondary text-end">{getSubTotal(expense.amount)}</p></div>
 			<!-- delete button -->
-			<div class="col-1 border d-none d-md-block">
+			<div class="col-0 border d-none d-md-block">
 				<button type="button" class="btn btn-secondary btn-sm" 
 					on:click="{deleteExpense(expense.id)}">
 						<ion-icon name="trash"></ion-icon>
