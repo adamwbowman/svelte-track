@@ -5,13 +5,10 @@
 	
 	// initial collection
 	let expenses = [];
-	let tags = [];
 
 	// firestore vars
 	const expensesCol = collection(db, 'expenses');
 	const queryAll = query(expensesCol, orderBy("createdAt", "asc"));
-	const tagsCol = collection(db, 'tags');
-	const queryAllTags = query(tagsCol, orderBy("name", "asc"));
 
 	// listener for collection reactivity
 	const listenCol = onSnapshot(queryAll, (querySnapshot) => {
@@ -19,12 +16,6 @@
 				return { id: doc.id, ...doc.data() }
 			});
 			console.table(expenses);
-	});
-	const listenColTags = onSnapshot(queryAllTags, (querySnapshot) => {
-			tags = querySnapshot.docs.map(doc => {
-				return { id: doc.id, ...doc.data() }
-			});
-			console.table(tags);
 	});
 
 	// page vars
@@ -95,22 +86,22 @@
 			<div class="col-lg-4 mb-3">
 				<div class="btn-group d-flex" role="group" aria-label="Tag Button Group">
 					<!-- grocery button -->
-					<input type="radio" class="btn-check" name="btncheck" id="btncheckGrocery" autocomplete="off" checked />
+					<input type="radio" class="btn-check" name="btncheck" id="btncheckGrocery" autocomplete="off" checked/>
 					<label class="btn btn-outline-secondary" for="btncheckGrocery"><ion-icon name="cart"></ion-icon></label>
 					<!-- amazon button -->
-					<input type="radio" class="btn-check" name="btncheck" id="btncheckAmazon" autocomplete="off" />
+					<input type="radio" class="btn-check" name="btncheck" id="btncheckAmazon" autocomplete="off"/>
 					<label class="btn btn-outline-secondary" for="btncheckAmazon"><ion-icon name="logo-amazon"></ion-icon></label>
 					<!-- home button -->
-					<input type="radio" class="btn-check" name="btncheck" id="btncheckHome" autocomplete="off" />
+					<input type="radio" class="btn-check" name="btncheck" id="btncheckHome" autocomplete="off"/>
 					<label class="btn btn-outline-secondary" for="btncheckHome"><ion-icon name="home"></ion-icon></label>
 					<!-- restaurant button -->
-					<input type="radio" class="btn-check" name="btncheck" id="btncheckRestaurant" autocomplete="off" />
+					<input type="radio" class="btn-check" name="btncheck" id="btncheckRestaurant" autocomplete="off"/>
 					<label class="btn btn-outline-secondary" for="btncheckRestaurant"><ion-icon name="restaurant"></ion-icon></label>
 					<!-- transit button -->
-					<input type="radio" class="btn-check" name="btncheck" id="btncheckTransit" autocomplete="off" />
+					<input type="radio" class="btn-check" name="btncheck" id="btncheckTransit" autocomplete="off"/>
 					<label class="btn btn-outline-secondary" for="btncheckTransit"><ion-icon name="subway"></ion-icon></label>
 					<!-- clothes button -->
-					<input type="radio" class="btn-check" name="btncheck" id="btncheckClothes" autocomplete="off" />
+					<input type="radio" class="btn-check" name="btncheck" id="btncheckClothes" autocomplete="off"/>
 					<label class="btn btn-outline-secondary" for="btncheckClothes"><ion-icon name="shirt"></ion-icon></label>
 				</div>
 			</div>
@@ -119,8 +110,7 @@
 					<input type="type" class="form-control" id="exampleLocation" placeholder="Location" 
 						on:keypress="{handleEnter}" 
 						bind:value="{newLocation}" 
-						use:init 
-					/>
+						use:init/>
 			</div>
 			<!-- amount -->
 			<div class="col-md-3 col-lg-2 mb-3">
@@ -128,8 +118,7 @@
 					<span class="input-group-text">$</span>
 					<input type="number" class="form-control" id="exampleAmount" placeholder="Amount" 
 						on:keypress="{handleEnter}" 
-						bind:value="{newAmount}"
-					/>
+						bind:value="{newAmount}"/>
 				</div>
 			</div>
 			<!-- add button -->
@@ -140,16 +129,22 @@
 		<!-- journal -->
 		{#each expenses as expense}
 		<div class="row gx-3 border">
-			<div class="col-0 border col-lg-3"></div>
+			<div class="col-1 border col-lg-3"></div>
 			<!-- tag -->
 			<div class="col-1  pull-left border">
 					<button type="button" class="btn btn-{expense.tagColor} btn-sm">
 							<ion-icon name="{expense.tag}"></ion-icon>
 					</button>
 				</div>
-			<div class="col-5 border col-lg-3"><p class="ps-2 p-md-0">{expense.location}</p></div>
-			<div class="col-2 border col-lg-1 overflow-auto"><p class="text-end">({expense.amount})</p></div>
-			<div class="col-2 border col-lg-1 overflow-auto"><p class="text-secondary text-end">{getSubTotal(expense.amount)}</p></div>
+			<div class="col-5 border col-lg-3">
+				<p class="ps-2 p-md-0">{expense.location}</p>
+			</div>
+			<div class="col-2 border col-lg-1 overflow-auto">
+				<p class="text-end">-{expense.amount}</p>
+			</div>
+			<div class="col-2 border col-lg-1 overflow-auto">
+				<p class="text-secondary text-end">{getSubTotal(expense.amount)}</p>
+			</div>
 			<!-- delete button -->
 			<div class="col-1 border d-none d-md-block">
 				<button type="button" class="btn btn-secondary btn-sm" 
