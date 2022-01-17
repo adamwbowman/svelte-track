@@ -44,7 +44,11 @@
 			newLocation = "", newAmount = "", newTag = "";	
 			error = "";
 		} else {
-			error = "Both location and an amount are required."
+			if (newTagName == "error") {
+				return error = "A tag is required."
+			} else {
+				return error = "Both location and an amount are required."
+			}
 		}
 	}
 
@@ -74,7 +78,7 @@
 				return newTag = "shirt,dark";
 				break;
 			default:
-				return newTag = "null,null";
+				return newTag = "error,error";
 				break;
 		}
 	}
@@ -98,8 +102,12 @@
 		}
 	}
 
+	function resetError() {
+		return error = "";
+	}
+
 	function init(el) {
-		el.focus()
+		el.focus();
 	}
 </script>
 
@@ -111,6 +119,18 @@
 		</div>
 	</nav>
 	<div class="container">
+		<!-- error -->
+		{#if (error != "")}
+		<div class="row">
+			<div class="col mb-2">
+				<div class="alert alert-danger alert-dismissible fade show" role="alert">
+					<span class="fas fa-exclamation-circle"></span> {error} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+						on:click="{resetError}"
+					></button>
+				</div>
+			</div>
+		</div>
+		{/if}
 		<!-- button group -->
 		<div class="row justify-content-center">
 			<div class="col-lg-4 mb-4">
