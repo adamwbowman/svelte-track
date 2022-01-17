@@ -2,7 +2,7 @@
 <script>
 	import { db } from './firebase.js'
 	import { collection, query, orderBy, onSnapshot, addDoc, doc, deleteDoc } from "firebase/firestore"; 
-	
+
 	// initial collection
 	let expenses = [];
 
@@ -207,55 +207,10 @@
 		</div>
 		{/each}
 	</div>
-
-
-
-
-
-
-<!--
-	<div class="container">
-		<div class="row">
-			<div class="col-12 col-md-3 input-group-sm"><input type="text" class="form-control" placeholder="Location" on:keypress="{handleEnter}" bind:value="{newLocation}"/></div>
-			<div class="col-12 col-md-2">
-				<div class="input-group input-group-sm mb-2">
-					<span class="input-group-text">$</span>
-					<input type="number" class="form-control" aria-label="Dollar amount"  on:keypress="{handleEnter}" bind:value="{newAmount}"/>
-				</div>
-			</div>
-			<div class="col-12 col-md-2"></div>
-			<div class="col-10 col-md-4 input-group-sm"><input type="text" class="form-control" placeholder="Tags" on:keypress="{handleEnter}" bind:value="{newNote}"/></div>
-			<div class="col-2 col-md-1"><button type="button" class="btn btn-success btn-sm" on:click="{addExpense}"><span class="fas fa-plus"></span></button></div>
-		</div>
-		{#each expenses as expense}
-		<div class="row" style="height: 40px">
-			<div class="col-6 col-md-3">{expense.location}</div>
-			<div class="col-6 col-md-2 clearfix">
-				<div class="float-start"></div>
-				<div class="float-end">({expense.amount})</div>
-			</div>
-			<div class="col-6 col-md-2 clearfix">
-				<div class="float-start">$</div>
-				<div class="float-end">{getSubTotal(expense.amount)}</div>
-			</div>
-			<div class="col-6 col-md-4"><span class="badge rounded-pill bg-info">{expense.note}</span></div>
-			<div class="col-12 col-md-1"><button class="btn btn-outline-secondary btn-sm" on:click="{deleteExpense(expense.id)}"><span class="fas fa-trash-alt"></span></button></div>
-		</div>
-		{/each}
-		<div class="row">
-			<div class="col-md-5">
-			{#if (error != "") }
-				<div class="alert alert-danger alert-dismissible fade show" role="alert">
-					<span class="fas fa-exclamation-circle"></span> {error} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-				</div>
-			{/if}
-			</div>
-		</div>
-	</div> -->
 </main>
 
 <style>
-.navbar {
-	margin-bottom: 15px;
+	.navbar {
+		margin-bottom: 15px;
 }
 </style>
