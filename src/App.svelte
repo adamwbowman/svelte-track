@@ -1,25 +1,45 @@
 
 <script>
 	import { db } from './firebase.js'
-	import { collection, query, orderBy, onSnapshot, addDoc, doc, deleteDoc } from "firebase/firestore"; 
+	import { collection, query, where, orderBy, onSnapshot, addDoc, doc, deleteDoc } from "firebase/firestore"; 
+	import weeks from './weeks.js';
+
+	let today = new Date();
+	let month = (today.getMonth() +1);
+	let day = (today.getDate());
+	let year = (today.getFullYear());
+	if (month.toString().length < 2) { month = '0' + month; }
+	if (day.toString().length < 2) { day = '0' + day; }
+	let dateToday = [month, day, year].join('/')
+	console.log(dateToday);
+	const arrWeeks = weeks;
+	let currentWeek = weeks.find(el => (el.start > dateToday));
+console.table(currentWeek);
+console.log(currentWeek.week);
 
 	// initial collection
 	let expenses = [];
+	let startDate = new Date('2022-01-01');
+	let endDate = new Date('2022-01-18');
 
 	// firestore vars
 	const expensesCol = collection(db, 'expenses');
-	const queryAll = query(expensesCol, orderBy("createdAt", "asc"));
+	const queryAll = query(expensesCol,
+		where("createdAt", ">=", startDate),	 
+		where("createdAt", "<=", endDate),
+		orderBy("createdAt", "asc")
+		);
 
 	// listener for collection reactivity
 	const listenCol = onSnapshot(queryAll, (querySnapshot) => {
 			expenses = querySnapshot.docs.map(doc => {
 				return { id: doc.id, ...doc.data() }
 			});
-			console.table(expenses);
+			// console.table(expenses);
 	});
 
 	// page vars
-	const Total = parseInt(500);
+	const Total = parseInt(500).toFixed(2);
 	let subTotal = parseInt(0);
 
 	// form vas
@@ -39,9 +59,13 @@
 				amount: newAmount,
 				tag: newTagName,
 				tagColor: newTagColor,
-				createdAt: new Date()
+				createdAt: new Date(),
+				year: new Date().getFullYear(),
+				month: new Date().getMonth(),
+				day: new Date().getDay(),
+				date: new Date().getDate()
 			});
-			newLocation = "", newAmount = "", newTag = "";	
+			newLocation = "", newAmount = "", newTagName = "", newTagColor = "";	
 			error = "";
 		} else {
 			if (newTagName == "error") {
@@ -112,14 +136,32 @@
 </script>
 
 <main>
-	<!-- navbar -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<div class="container-fluid mb-0 h1">
-			<a class="navbar-brand" href="#/">${Total}</a>
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/#">${Total}</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarText">
+				<!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="/#">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/#">Features</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/#">Pricing</a>
+					</li>
+				</ul> -->
+				<span class="navbar-text">
+					Period: {startDate.getDate()} - {endDate.getDate()}
+				</span>
+			</div>
 		</div>
 	</nav>
 	<div class="container">
-		<!-- error -->
+<!-- error -->
 		{#if (error != "")}
 		<div class="row">
 			<div class="col mb-2">
@@ -178,7 +220,7 @@
 				>Add</button>
 			</div>
 		</div>
-		<!-- journal -->
+<!-- journal -->
 		{#each expenses as expense}
 		<div class="row gx-3">
 			<div class="col-1 col-lg-3"></div>
@@ -189,7 +231,7 @@
 					</button>
 				</div>
 			<div class="col-5 col-lg-3">
-				<p class="ps-2 p-md-0">{expense.location}</p>
+				<p class="ps-2 p-md-0">{new Date(expense.createdAt * 1000).getDate()} - {expense.location}</p>
 			</div>
 			<div class="col-2 col-lg-1 overflow-auto">
 				<p class="text-end">-{expense.amount}</p>
@@ -212,5 +254,5 @@
 <style>
 	.navbar {
 		margin-bottom: 15px;
-}
+	}
 </style>
