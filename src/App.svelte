@@ -6,10 +6,9 @@
 
 	// initial collections
 	let expenses = [];
-	let arrWeeks = weeks;
 
 	// date processing
-	let today = new Date("01/18/2022");
+	let today = new Date();
 	let month = (today.getMonth() +1);
 	let day = (today.getDate());
 	let year = (today.getFullYear());
@@ -18,17 +17,18 @@
 	let dateToday = [month, day, year].join('/')
 	let findWeek = weeks.find(el => (el.start > dateToday));
 	let currentWeek = weeks.find(el => (el.week == (findWeek.week -1)));
-	// console.log(findWeek);
+console.log(findWeek);
 	let startDate = new Date(currentWeek.start);
 	let endDate = new Date(currentWeek.end);
+	let formattedEndDate = currentWeek.end.replace("23:59:59", "");
 console.log(startDate);
 console.log(endDate);
 
 	// firestore vars
 	const expensesCol = collection(db, 'expenses');
 	const queryAll = query(expensesCol,
-		where("createdAt", ">=", startDate),
-		where("createdAt", "<=", endDate),
+		// where("createdAt", ">=", startDate),
+		// where("createdAt", "<=", endDate),
 		orderBy("createdAt", "asc")
 		);
 
@@ -39,6 +39,13 @@ console.log(endDate);
 			});
 			console.table(expenses);
 	});
+
+	function setTag(tagName) {
+		let fitleredExpenses = expenses.filter(el => el.tag === tagName);
+			console.table(fitleredExpenses);
+	}
+
+
 
 	// page vars
 	const Total = parseInt(500).toFixed(2);
@@ -149,7 +156,7 @@ console.log(endDate);
 					</li>
 				</ul> -->
 				<span class="navbar-text">
-					Period: {currentWeek.start} - {currentWeek.end}
+					{currentWeek.start} - {formattedEndDate}
 				</span>
 			</div>
 		</div>
@@ -220,7 +227,9 @@ console.log(endDate);
 			<div class="col-1 col-lg-3"></div>
 			<!-- tag -->
 			<div class="col-1 pull-left">
-					<button type="button" class="btn btn-{expense.tagColor} btn-sm">
+					<button type="button" class="btn btn-{expense.tagColor} btn-sm"
+						on:click="{setTag(expense.tag)}"
+					>
 							<ion-icon name="{expense.tag}"></ion-icon>
 					</button>
 				</div>
@@ -242,6 +251,19 @@ console.log(endDate);
 			</div>
 		</div>
 		{/each}
+	</div>
+	
+	
+	
+	<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Enable both scrolling & backdrop</button>
+	<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+		<div class="offcanvas-header">
+			<h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Backdroped with scrolling</h5>
+			<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+		</div>
+		<div class="offcanvas-body">
+			<p>Try scrolling the rest of the page to see this option in action.</p>
+		</div>
 	</div>
 </main>
 
