@@ -4,28 +4,30 @@
 	import { collection, query, where, orderBy, onSnapshot, addDoc, doc, deleteDoc } from "firebase/firestore"; 
 	import weeks from './weeks.js';
 
-	let today = new Date();
+	// initial collections
+	let expenses = [];
+	let arrWeeks = weeks;
+
+	// date processing
+	let today = new Date("01/18/2022");
 	let month = (today.getMonth() +1);
 	let day = (today.getDate());
 	let year = (today.getFullYear());
 	if (month.toString().length < 2) { month = '0' + month; }
 	if (day.toString().length < 2) { day = '0' + day; }
 	let dateToday = [month, day, year].join('/')
-	console.log(dateToday);
-	const arrWeeks = weeks;
-	let currentWeek = weeks.find(el => (el.start > dateToday));
-console.table(currentWeek);
-console.log(currentWeek.week);
-
-	// initial collection
-	let expenses = [];
-	let startDate = new Date('2022-01-01');
-	let endDate = new Date('2022-01-18');
+	let findWeek = weeks.find(el => (el.start > dateToday));
+	let currentWeek = weeks.find(el => (el.week == (findWeek.week -1)));
+	// console.log(findWeek);
+	let startDate = new Date(currentWeek.start);
+	let endDate = new Date(currentWeek.end);
+console.log(startDate);
+console.log(endDate);
 
 	// firestore vars
 	const expensesCol = collection(db, 'expenses');
 	const queryAll = query(expensesCol,
-		where("createdAt", ">=", startDate),	 
+		where("createdAt", ">=", startDate),
 		where("createdAt", "<=", endDate),
 		orderBy("createdAt", "asc")
 		);
@@ -35,7 +37,7 @@ console.log(currentWeek.week);
 			expenses = querySnapshot.docs.map(doc => {
 				return { id: doc.id, ...doc.data() }
 			});
-			// console.table(expenses);
+			console.table(expenses);
 	});
 
 	// page vars
@@ -107,10 +109,6 @@ console.log(currentWeek.week);
 		}
 	}
 
-	function resetSubTotal(){
-		subTotal = parseInt(0);
-	}
-
 	function getSubTotal(amount) {
 		if (subTotal == 0) {
 			subTotal = (500-amount).toFixed(2);
@@ -126,13 +124,9 @@ console.log(currentWeek.week);
 		}
 	}
 
-	function resetError() {
-		return error = "";
-	}
-
-	function init(el) {
-		el.focus();
-	}
+	function resetSubTotal(){ subTotal = parseInt(0); }
+	function resetError() { return error = ""; }
+	function init(el) { el.focus(); }
 </script>
 
 <main>
@@ -155,7 +149,7 @@ console.log(currentWeek.week);
 					</li>
 				</ul> -->
 				<span class="navbar-text">
-					Period: {startDate.getDate()} - {endDate.getDate()}
+					Period: {currentWeek.start} - {currentWeek.end}
 				</span>
 			</div>
 		</div>
@@ -173,7 +167,7 @@ console.log(currentWeek.week);
 			</div>
 		</div>
 		{/if}
-		<!-- button group -->
+<!-- button group -->
 		<div class="row justify-content-center">
 			<div class="col-lg-4 mb-4">
 				<div class="btn-group d-flex text-right" role="group" aria-label="Tag Button Group">
