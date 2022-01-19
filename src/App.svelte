@@ -1,7 +1,7 @@
 
 <script>
 	import { db } from './firebase.js'
-	import { collection, query, where, orderBy, onSnapshot, addDoc, doc, deleteDoc } from "firebase/firestore"; 
+	import { collection, query, orderBy, onSnapshot, addDoc, doc, deleteDoc } from "firebase/firestore"; 
 	import weeks from './weeks.js';
 
 	// initial collections
@@ -56,6 +56,7 @@ console.log(endDate);
 
 	function filterExpenses(amt) {
 		resetSubTotal();
+
 		var selectedWeek = weeks.find(el => (el.week == (findWeek.week - parseInt(amt))));
 console.log(selectedWeek);
 		filteredExpenses = expenses.filter(el => {
@@ -76,6 +77,7 @@ console.table(expenses);
 	// page vars
 	const Total = parseInt(500).toFixed(2);
 	let subTotal = parseInt(0);
+	let currentRange = "current";
 
 	// form vars
 	let newLocation = "", newAmount = "", newTag = "";
@@ -166,9 +168,28 @@ console.table(expenses);
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="/#">${Total}</a>
-			<span class="navbar-text">
-				{currentWeek.start} - {formattedEndDate}
-			</span>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarText">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link {currentRange === 'previous' ? 'active' : ''}" href="/#" 
+							on:click="{() => currentRange = 'previous'}" 
+							on:click="{() => filterExpenses(2)}"
+							>Previous Week</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link {currentRange === 'current' ? 'active' : ''}" href="/#" 
+							on:click="{() => currentRange = 'current'}" 
+							on:click="{() => filterExpenses(1)}"
+						>Current Week</a>
+					</li>
+				</ul>
+				<span class="navbar-text">
+					{currentWeek.start} - {formattedEndDate}
+				</span>
+			</div>
 		</div>
 	</nav>
 	<div class="container">
@@ -275,13 +296,13 @@ console.table(expenses);
 			{/each}
 		</div>
 	</div>
-
-	<button class="btn btn-secondary" type="button" on:click="{() => filterExpenses(2)}">previous week</button>
-	<button class="btn btn-secondary" type="button" on:click="{() => filterExpenses(1)}">current week</button>
 </main>
 
 <style>
 	.navbar {
 		margin-bottom: 15px;
+	}
+	.selected {
+		color: red;
 	}
 </style>
