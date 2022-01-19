@@ -7,6 +7,7 @@
 	// initial collections
 	let expenses = [];
 	let filteredExpenses = [];
+	let expensesByTag = [];
 
 	// date processing
 	let today = new Date();
@@ -33,10 +34,8 @@ console.log(endDate);
 	// firestore vars
 	const expensesCol = collection(db, 'expenses');
 	const queryAll = query(expensesCol,
-		// where("createdAt", ">=", startDate),
-		// where("createdAt", "<=", endDate),
 		orderBy("createdAt", "asc")
-		);
+	);
 
 	// listener for collection reactivity
 	const listenCol = onSnapshot(queryAll, (querySnapshot) => {
@@ -46,17 +45,16 @@ console.log(endDate);
 			// console.table(expenses);
 			filteredExpenses = expenses;
 			filterExpenses();
-			console.log("expenses loaded");
+console.log("expenses loaded");
 	});
 
 
 
 
-let expensesByTag = [];
 
 	function setTag(tagName) {
 		expensesByTag = expenses.filter(el => el.tag === tagName);
-		console.log(expensesByTag);
+console.log(expensesByTag);
 	}
 
 	function filterExpenses(amt) {
@@ -69,9 +67,11 @@ console.log(selectedWeek);
 			var endDate = new Date(selectedWeek.end);
 			return (dbDate >= startDate && dbDate <= endDate);
 		});
-		console.table(filteredExpenses);
-		console.table(expenses);
+console.table(filteredExpenses);
+console.table(expenses);
 	}
+
+
 
 
 
@@ -169,39 +169,23 @@ console.log(selectedWeek);
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="/#">${Total}</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarText">
-				<!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="/#">Home</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/#">Features</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/#">Pricing</a>
-					</li>
-				</ul> -->
-				<span class="navbar-text">
-					{currentWeek.start} - {formattedEndDate}
-				</span>
-			</div>
+			<span class="navbar-text">
+				{currentWeek.start} - {formattedEndDate}
+			</span>
 		</div>
 	</nav>
 	<div class="container">
 <!-- error -->
 		{#if (error != "")}
-		<div class="row">
-			<div class="col mb-2">
-				<div class="alert alert-danger alert-dismissible fade show" role="alert">
-					<span class="fas fa-exclamation-circle"></span> {error} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
-						on:click="{resetError}"
-					></button>
+			<div class="row">
+				<div class="col mb-2">
+					<div class="alert alert-danger alert-dismissible fade show" role="alert">
+						<span class="fas fa-exclamation-circle"></span> {error} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+							on:click="{resetError}"
+						></button>
+					</div>
 				</div>
 			</div>
-		</div>
 		{/if}
 <!-- button group -->
 		<div class="row justify-content-center">
@@ -229,10 +213,10 @@ console.log(selectedWeek);
 			</div>
 			<!-- location -->
 			<div class="col-md-4 col-lg-4 mb-4">
-					<input type="type" class="form-control" id="exampleLocation" placeholder="Location" 
-						on:keypress="{handleEnter}" 
-						bind:value="{newLocation}" 
-						use:init/>
+				<input type="type" class="form-control" id="exampleLocation" placeholder="Location" 
+					on:keypress="{handleEnter}" 
+					bind:value="{newLocation}" 
+					use:init/>
 			</div>
 			<!-- amount -->
 			<div class="col-md-3 col-lg-2 mb-4">
@@ -253,39 +237,36 @@ console.log(selectedWeek);
 <!-- journal -->
 		<!-- {#each expenses as expense} -->
 		{#each filteredExpenses as expense}
-		<div class="row gx-3">
-			<div class="col-1 col-lg-3"></div>
-			<!-- tag -->
-			<div class="col-1 pull-left">
-					<button type="button" class="btn btn-{expense.tagColor} btn-sm"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"
-						on:click="{setTag(expense.tag)}"
-					>
+			<div class="row gx-3">
+				<div class="col-1 col-lg-3"></div>
+				<!-- tag -->
+				<div class="col-1 pull-left">
+						<button type="button" class="btn btn-{expense.tagColor} btn-sm"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"
+							on:click="{setTag(expense.tag)}"
+						>
 							<ion-icon name="{expense.tag}"></ion-icon>
+						</button>
+					</div>
+				<div class="col-5 col-lg-3">
+					<p class="ps-2 p-md-0">{new Date(expense.createdAt * 1000).getDate()} - {expense.location}</p>
+				</div>
+				<div class="col-2 col-lg-1 overflow-auto">
+					<p class="text-end">-{expense.amount}</p>
+				</div>
+				<div class="col-2 col-lg-1 overflow-auto">
+					<p class="text-secondary text-end">{getSubTotal(expense.amount)}</p>
+				</div>
+				<!-- delete button -->
+				<div class="col-1 d-none d-md-block">
+					<button type="button" class="btn btn-outline-secondary btn-sm" 
+						on:click="{deleteExpense(expense.id)}">
+							<ion-icon name="trash"></ion-icon>
 					</button>
 				</div>
-			<div class="col-5 col-lg-3">
-				<p class="ps-2 p-md-0">{new Date(expense.createdAt * 1000).getDate()} - {expense.location}</p>
 			</div>
-			<div class="col-2 col-lg-1 overflow-auto">
-				<p class="text-end">-{expense.amount}</p>
-			</div>
-			<div class="col-2 col-lg-1 overflow-auto">
-				<p class="text-secondary text-end">{getSubTotal(expense.amount)}</p>
-			</div>
-			<!-- delete button -->
-			<div class="col-1 d-none d-md-block">
-				<button type="button" class="btn btn-outline-secondary btn-sm" 
-					on:click="{deleteExpense(expense.id)}">
-						<ion-icon name="trash"></ion-icon>
-				</button>
-			</div>
-		</div>
 		{/each}
 	</div>
-	
-	
-	
-	<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Enable both scrolling & backdrop</button>
+<!-- offcanvas data -->
 	<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
 		<div class="offcanvas-header">
 			<h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Backdroped with scrolling</h5>
@@ -293,7 +274,7 @@ console.log(selectedWeek);
 		</div>
 		<div class="offcanvas-body">
 			{#each expensesByTag as expense}
-			<p>{expense.tag}-{expense.location}-{expense.amount}</p>
+				<p>{expense.tag}-{expense.location}-{expense.amount}</p>
 			{/each}
 		</div>
 	</div>
