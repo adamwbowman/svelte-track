@@ -39,13 +39,11 @@ console.log(endDate);
 
 	// listener for collection reactivity
 	const listenCol = onSnapshot(queryAll, (querySnapshot) => {
-			expenses = querySnapshot.docs.map(doc => {
-				return { id: doc.id, ...doc.data() }
-			});
-			// console.table(expenses);
-			filteredExpenses = expenses;
-			filterExpenses();
-console.log("expenses loaded");
+		expenses = querySnapshot.docs.map(doc => {
+			return { id: doc.id, ...doc.data() }
+		});
+		filteredExpenses = expenses;
+		filterExpenses();
 	});
 
 
@@ -54,7 +52,6 @@ console.log("expenses loaded");
 
 	function setTag(tagName) {
 		expensesByTag = expenses.filter(el => el.tag === tagName);
-console.log(expensesByTag);
 	}
 
 	function filterExpenses(amt) {
@@ -80,7 +77,7 @@ console.table(expenses);
 	const Total = parseInt(500).toFixed(2);
 	let subTotal = parseInt(0);
 
-	// form vas
+	// form vars
 	let newLocation = "", newAmount = "", newTag = "";
 	let error = "";
 
