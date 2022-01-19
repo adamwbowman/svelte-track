@@ -6,6 +6,7 @@
 
 	// initial collections
 	let expenses = [];
+	let filteredExpenses = [];
 
 	// date processing
 	let today = new Date();
@@ -16,10 +17,15 @@
 	if (day.toString().length < 2) { day = '0' + day; }
 	let dateToday = [month, day, year].join('/')
 	let findWeek = weeks.find(el => (el.start > dateToday));
+
 	let currentWeek = weeks.find(el => (el.week == (findWeek.week -1)));
+	let previousWeek = weeks.find(el => (el.week == (findWeek.week -2)));
 console.log(findWeek);
-	let startDate = new Date(currentWeek.start);
-	let endDate = new Date(currentWeek.end);
+
+// let startDate = new Date(currentWeek.start);
+	// let endDate = new Date(currentWeek.end);
+	let startDate = new Date(previousWeek.start);
+	let endDate = new Date(previousWeek.end);
 	let formattedEndDate = currentWeek.end.replace("23:59:59", "");
 console.log(startDate);
 console.log(endDate);
@@ -37,13 +43,36 @@ console.log(endDate);
 			expenses = querySnapshot.docs.map(doc => {
 				return { id: doc.id, ...doc.data() }
 			});
-			console.table(expenses);
+			// console.table(expenses);
+			filteredExpenses = expenses;
+			filterExpenses();
+			console.log("expenses loaded");
 	});
 
+
+
+
+let expensesByTag = [];
+
 	function setTag(tagName) {
-		let fitleredExpenses = expenses.filter(el => el.tag === tagName);
-			console.table(fitleredExpenses);
+		expensesByTag = expenses.filter(el => el.tag === tagName);
+		console.log(expensesByTag);
 	}
+
+	function filterExpenses(amt) {
+		resetSubTotal();
+		var selectedWeek = weeks.find(el => (el.week == (findWeek.week - parseInt(amt))));
+console.log(selectedWeek);
+		filteredExpenses = expenses.filter(el => {
+			var dbDate = el.createdAt.toDate();
+			var startDate = new Date(selectedWeek.start);
+			var endDate = new Date(selectedWeek.end);
+			return (dbDate >= startDate && dbDate <= endDate);
+		});
+		console.table(filteredExpenses);
+		console.table(expenses);
+	}
+
 
 
 
@@ -222,12 +251,13 @@ console.log(endDate);
 			</div>
 		</div>
 <!-- journal -->
-		{#each expenses as expense}
+		<!-- {#each expenses as expense} -->
+		{#each filteredExpenses as expense}
 		<div class="row gx-3">
 			<div class="col-1 col-lg-3"></div>
 			<!-- tag -->
 			<div class="col-1 pull-left">
-					<button type="button" class="btn btn-{expense.tagColor} btn-sm"
+					<button type="button" class="btn btn-{expense.tagColor} btn-sm"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"
 						on:click="{setTag(expense.tag)}"
 					>
 							<ion-icon name="{expense.tag}"></ion-icon>
@@ -262,9 +292,14 @@ console.log(endDate);
 			<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 		</div>
 		<div class="offcanvas-body">
-			<p>Try scrolling the rest of the page to see this option in action.</p>
+			{#each expensesByTag as expense}
+			<p>{expense.tag}-{expense.location}-{expense.amount}</p>
+			{/each}
 		</div>
 	</div>
+
+	<button class="btn btn-secondary" type="button" on:click="{() => filterExpenses(2)}">previous week</button>
+	<button class="btn btn-secondary" type="button" on:click="{() => filterExpenses(1)}">current week</button>
 </main>
 
 <style>
