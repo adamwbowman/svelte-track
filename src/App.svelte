@@ -23,7 +23,7 @@
 	let previousWeek = weeks.find(el => (el.week == (findWeek.week -2)));
 console.log(findWeek);
 
-// let startDate = new Date(currentWeek.start);
+	// let startDate = new Date(currentWeek.start);
 	// let endDate = new Date(currentWeek.end);
 	let startDate = new Date(previousWeek.start);
 	let endDate = new Date(previousWeek.end);
@@ -181,7 +181,7 @@ console.table(expenses);
 				<div class="col mb-2">
 					<div class="alert alert-danger alert-dismissible fade show" role="alert">
 						<span class="fas fa-exclamation-circle"></span> {error} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
-							on:click="{resetError}"
+							on:click="{() => resetError()}"
 						></button>
 					</div>
 				</div>
@@ -230,7 +230,7 @@ console.table(expenses);
 			<!-- add button -->
 			<div class="col-md-2 mb-5">
 				<button type="button" class="btn btn-success" style="width: 100%"
-					on:click="{addExpense}"
+					on:click="{() => addExpense()}"
 				>Add</button>
 			</div>
 		</div>
@@ -242,7 +242,7 @@ console.table(expenses);
 				<!-- tag -->
 				<div class="col-1 pull-left">
 						<button type="button" class="btn btn-{expense.tagColor} btn-sm"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"
-							on:click="{setTag(expense.tag)}"
+							on:click="{() => setTag(expense.tag)}"
 						>
 							<ion-icon name="{expense.tag}"></ion-icon>
 						</button>
@@ -259,7 +259,7 @@ console.table(expenses);
 				<!-- delete button -->
 				<div class="col-1 d-none d-md-block">
 					<button type="button" class="btn btn-outline-secondary btn-sm" 
-						on:click="{deleteExpense(expense.id)}">
+						on:click="{() => deleteExpense(expense.id)}">
 							<ion-icon name="trash"></ion-icon>
 					</button>
 				</div>
