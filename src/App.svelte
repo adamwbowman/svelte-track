@@ -18,18 +18,11 @@
 	if (day.toString().length < 2) { day = '0' + day; }
 	let dateToday = [month, day, year].join('/')
 	let findWeek = weeks.find(el => (el.start > dateToday));
-
 	let currentWeek = weeks.find(el => (el.week == (findWeek.week -1)));
-	let previousWeek = weeks.find(el => (el.week == (findWeek.week -2)));
 console.log(findWeek);
-
-	// let startDate = new Date(currentWeek.start);
-	// let endDate = new Date(currentWeek.end);
-	let startDate = new Date(previousWeek.start);
-	let endDate = new Date(previousWeek.end);
-	let formattedEndDate = currentWeek.end.replace("23:59:59", "");
-console.log(startDate);
-console.log(endDate);
+	let startDate = new Date(currentWeek.start);
+	let endDate = new Date(currentWeek.end);
+console.log(startDate+"-"+endDate);
 
 	// firestore vars
 	const expensesCol = collection(db, 'expenses');
@@ -43,32 +36,27 @@ console.log(endDate);
 			return { id: doc.id, ...doc.data() }
 		});
 		filteredExpenses = expenses;
-		filterExpenses();
+		filterExpenses(1);
 	});
 
 
 
 
 
-	function setTag(tagName) {
-		expensesByTag = expenses.filter(el => el.tag === tagName);
-	}
 
-	function filterExpenses(amt) {
+	function filterExpenses(weekNum) {
 		resetSubTotal();
-
-		var selectedWeek = weeks.find(el => (el.week == (findWeek.week - parseInt(amt))));
-console.log(selectedWeek);
+		var selectedWeek = weeks.find(el => (el.week == (findWeek.week - parseInt(weekNum))));
+// console.log(selectedWeek);
 		filteredExpenses = expenses.filter(el => {
 			var dbDate = el.createdAt.toDate();
-			var startDate = new Date(selectedWeek.start);
-			var endDate = new Date(selectedWeek.end);
+			startDate = new Date(selectedWeek.start);
+			endDate = new Date(selectedWeek.end);
 			return (dbDate >= startDate && dbDate <= endDate);
 		});
-console.table(filteredExpenses);
-console.table(expenses);
+// console.table(filteredExpenses);
+// console.table(expenses);
 	}
-
 
 
 
@@ -83,7 +71,32 @@ console.table(expenses);
 	let newLocation = "", newAmount = "", newTag = "";
 	let error = "";
 
-	// functions
+	let bigTagName = "", bigTagColor = "", bigTagLabel = "";
+	// filtering functions
+	function setTag(tagName, tagColor) {
+		expensesByTag = expenses.filter(el => el.tag === tagName);
+		bigTagName = tagName;
+		bigTagColor = tagColor;
+		switch (tagName) {
+			case "cart":
+				return bigTagLabel = "Groceries"; break;
+			case "logo-amazon":
+				return bigTagLabel = "Amazon"; break;
+			case "home":
+				return bigTagLabel = "Home Goods"; break;
+			case "restaurant":
+				return bigTagLabel = "Eating Out"; break;
+			case "subway":
+				return bigTagLabel = "Transit"; break;
+			case "shirt":
+				return bigTagLabel = "Clothes"; break;
+			default:
+				return bigTagLabel = "Error";
+				break;
+		}
+	}
+
+	// crud functions
 	function addExpense() {
 		let tagInfo = getTagInfo(newTag).split(",");
 		let newTagName= tagInfo[0];
@@ -144,6 +157,7 @@ console.table(expenses);
 		}
 	}
 
+	// page functions
 	function getSubTotal(amount) {
 		if (subTotal == 0) {
 			subTotal = (500-amount).toFixed(2);
@@ -153,12 +167,7 @@ console.table(expenses);
 		return subTotal;
 	}
 
-	function handleEnter(event) {
-		if (event.key == "Enter") {
-			addExpense();
-		}
-	}
-
+	function handleEnter(event) { if (event.key == "Enter") { addExpense(); }}
 	function resetSubTotal(){ subTotal = parseInt(0); }
 	function resetError() { return error = ""; }
 	function init(el) { el.focus(); }
@@ -187,7 +196,8 @@ console.table(expenses);
 					</li>
 				</ul>
 				<span class="navbar-text">
-					{currentWeek.start} - {formattedEndDate}
+					{startDate} - {endDate}
+					<!-- {formattedStartDate} - {formattedEndDate} -->
 				</span>
 			</div>
 		</div>
@@ -260,7 +270,7 @@ console.table(expenses);
 				<!-- tag -->
 				<div class="col-1 pull-left">
 						<button type="button" class="btn btn-{expense.tagColor} btn-sm"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"
-							on:click="{() => setTag(expense.tag)}"
+							on:click="{() => setTag(expense.tag, expense.tagColor)}"
 						>
 							<ion-icon name="{expense.tag}"></ion-icon>
 						</button>
@@ -287,13 +297,30 @@ console.table(expenses);
 <!-- offcanvas data -->
 	<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
 		<div class="offcanvas-header">
-			<h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Backdroped with scrolling</h5>
+			<h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
+				<button type="button" class="btn btn-{bigTagColor}"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+					<ion-icon name="{bigTagName}"></ion-icon>
+				</button>
+				 &nbsp; {bigTagLabel}
+			</h5>
 			<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 		</div>
 		<div class="offcanvas-body">
-			{#each expensesByTag as expense}
-				<p>{expense.tag}-{expense.location}-{expense.amount}</p>
-			{/each}
+			<div class="container">
+				{#each expensesByTag as expense}
+					<div class="row gx-2">
+						<div class="col-2">
+							<p class="text-start">{expense.month}/{expense.day}</p>
+						</div>
+						<div class="col-8">
+							<p class="text-start">{expense.location}</p>
+						</div>
+						<div class="col-2">
+							<p class="text-end">{expense.amount}</p>
+						</div>
+					</div>
+				{/each}
+			</div>
 		</div>
 	</div>
 </main>
@@ -301,8 +328,5 @@ console.table(expenses);
 <style>
 	.navbar {
 		margin-bottom: 15px;
-	}
-	.selected {
-		color: red;
 	}
 </style>
