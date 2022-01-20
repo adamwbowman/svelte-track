@@ -4,7 +4,7 @@
 	import { collection, query, orderBy, onSnapshot, addDoc, doc, deleteDoc } from "firebase/firestore"; 
 	import weeks from './weeks.js';
 	import { fade, fly } from 'svelte/transition';
-	import {formatDate, formatDay, formatMonth, formatYear} from './utils.js';
+	import {formatDay, formatMonth} from './utils.js';
 
 	// initial collections
 	let expenses = [];
@@ -71,10 +71,10 @@ let formattedEndDate = " ";
 	let currentRange = "current";
 
 	// form vars
+	let bigTagName = "", bigTagColor = "", bigTagLabel = "";
 	let newLocation = "", newAmount = "", newTag = "";
 	let error = "";
 
-	let bigTagName = "", bigTagColor = "", bigTagLabel = "";
 	// filtering functions
 	function setTag(tagName, tagColor) {
 		expensesByTag = expenses.filter(el => el.tag === tagName);
@@ -94,8 +94,7 @@ let formattedEndDate = " ";
 			case "shirt":
 				return bigTagLabel = "Clothes"; break;
 			default:
-				return bigTagLabel = "Error";
-				break;
+				return bigTagLabel = "Error"; break;
 		}
 	}
 
@@ -107,6 +106,9 @@ let formattedEndDate = " ";
 		resetSubTotal();
 		if ((newLocation != "") && (newAmount != "")) {
 			//expenses = [...expenses, {location: newLocation}];
+			var strMonth = new Date().getMonth();
+			var strDay = new Date().getDay();
+			strMonth = formatMonth(strMonth);
 			const docRef = addDoc(expensesCol, {
 				location: newLocation,
 				amount: newAmount,
@@ -114,7 +116,7 @@ let formattedEndDate = " ";
 				tagColor: newTagColor,
 				createdAt: new Date(),
 				year: new Date().getFullYear(),
-				month: new Date().getMonth(),
+				month: strMonth,
 				day: new Date().getDay(),
 				date: new Date().getDate()
 			});
@@ -137,26 +139,19 @@ let formattedEndDate = " ";
 	function getTagInfo(tagNumber){
 		switch (tagNumber) {
 			case 1:
-				return newTag = "cart,success";
-				break;
+				return newTag = "cart,success"; break;
 			case 2:
-				return newTag = "logo-amazon,warning";
-				break;
+				return newTag = "logo-amazon,warning"; break;
 			case 3:
-				return newTag = "home,primary";
-				break;
+				return newTag = "home,primary"; break;
 			case 4:
-				return newTag = "restaurant,danger";
-				break;
+				return newTag = "restaurant,danger"; break;
 			case 5:
-				return newTag = "subway,info";
-				break;
+				return newTag = "subway,info"; break;
 			case 6:
-				return newTag = "shirt,dark";
-				break;
+				return newTag = "shirt,dark"; break;
 			default:
-				return newTag = "error,error";
-				break;
+				return newTag = "error,error"; break;
 		}
 	}
 
@@ -266,7 +261,6 @@ let formattedEndDate = " ";
 			</div>
 		</div>
 <!-- journal -->
-		<!-- {#each expenses as expense} -->
 		{#each filteredExpenses as expense}
 			<div class="row gx-3" in:fly="{{ y: 200, duration: 2000 }}" out:fade>
 				<div class="col-1 col-lg-3"></div>
