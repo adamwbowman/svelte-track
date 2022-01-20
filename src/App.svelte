@@ -3,6 +3,8 @@
 	import { db } from './firebase.js'
 	import { collection, query, orderBy, onSnapshot, addDoc, doc, deleteDoc } from "firebase/firestore"; 
 	import weeks from './weeks.js';
+	import { fade, fly } from 'svelte/transition';
+	import {formatDate, formatDay, formatMonth, formatYear} from './utils.js';
 
 	// initial collections
 	let expenses = [];
@@ -42,7 +44,8 @@ console.log(startDate+"-"+endDate);
 
 
 
-
+let formattedStartDate = " ";
+let formattedEndDate = " ";
 
 	function filterExpenses(weekNum) {
 		resetSubTotal();
@@ -196,7 +199,7 @@ console.log(startDate+"-"+endDate);
 					</li>
 				</ul>
 				<span class="navbar-text">
-					{startDate} - {endDate}
+					<!-- {startDate} - {endDate} -->
 					<!-- {formattedStartDate} - {formattedEndDate} -->
 				</span>
 			</div>
@@ -220,7 +223,7 @@ console.log(startDate+"-"+endDate);
 			<div class="col-lg-4 mb-4">
 				<div class="btn-group d-flex text-right" role="group" aria-label="Tag Button Group">
 					<!-- grocery button -->
-					<input type="radio" class="btn-check" name="btnradio" value={1} bind:group={newTag} id="btnradioGrocery" autocomplete="off" checked>
+					<input type="radio" class="btn-check" name="btnradio" value={1} bind:group={newTag} id="btnradioGrocery" autocomplete="off">
 					<label class="btn btn-outline-secondary" for="btnradioGrocery"><ion-icon name="cart"></ion-icon></label>
 					<!-- amazon button -->
 					<input type="radio" class="btn-check" name="btnradio" value={2} bind:group={newTag} id="btnradioAmazon" autocomplete="off">
@@ -265,7 +268,7 @@ console.log(startDate+"-"+endDate);
 <!-- journal -->
 		<!-- {#each expenses as expense} -->
 		{#each filteredExpenses as expense}
-			<div class="row gx-3">
+			<div class="row gx-3" in:fly="{{ y: 200, duration: 2000 }}" out:fade>
 				<div class="col-1 col-lg-3"></div>
 				<!-- tag -->
 				<div class="col-1 pull-left">
@@ -297,6 +300,7 @@ console.log(startDate+"-"+endDate);
 <!-- offcanvas data -->
 	<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
 		<div class="offcanvas-header">
+			<!-- title/big button -->
 			<h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
 				<button type="button" class="btn btn-{bigTagColor}"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
 					<ion-icon name="{bigTagName}"></ion-icon>
@@ -307,8 +311,9 @@ console.log(startDate+"-"+endDate);
 		</div>
 		<div class="offcanvas-body">
 			<div class="container">
+<!-- list -->
 				{#each expensesByTag as expense}
-					<div class="row gx-2">
+					<div class="row gx-2" in:fly="{{ x: -200, duration: 2000 }}">
 						<div class="col-2">
 							<p class="text-start">{expense.month}/{expense.day}</p>
 						</div>
@@ -316,7 +321,7 @@ console.log(startDate+"-"+endDate);
 							<p class="text-start">{expense.location}</p>
 						</div>
 						<div class="col-2">
-							<p class="text-end">{expense.amount}</p>
+							<p class="text-end">-{expense.amount}</p>
 						</div>
 					</div>
 				{/each}
