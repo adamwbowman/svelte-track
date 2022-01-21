@@ -24,7 +24,6 @@
 		if (day.toString().length < 2) { day = '0' + day; }
 		let dateToday = [month, day, year].join('/')
 		let findWeek = weeks.find(el => (el.start > dateToday));
-		// console.log(findWeek);
 		let currentWeek = weeks.find(el => (el.week == (findWeek.week -1)));
 		let startDate = new Date(currentWeek.start);
 		let endDate = new Date(currentWeek.end);
@@ -49,20 +48,13 @@
 		function filterExpenses(weekNum) {
 			resetSubTotal();
 			var selectedWeek = weeks.find(el => (el.week == (findWeek.week - parseInt(weekNum))));
-			// console.log(selectedWeek);
 			filteredExpenses = expenses.filter(el => {
 				var dbDate = el.createdAt.toDate();
 				startDate = new Date(selectedWeek.start);
 				endDate = new Date(selectedWeek.end);
 				return (dbDate >= startDate && dbDate <= endDate);
 			});
-			// console.table(filteredExpenses);
-			// console.table(expenses);
 		}
-
-
-
-
 
 	// page vars
 		const Total = parseInt(500).toFixed(2);
@@ -80,20 +72,13 @@
 			bigTagName = tagName;
 			bigTagColor = tagColor;
 			switch (tagName) {
-				case "cart":
-					return bigTagLabel = "Groceries"; break;
-				case "logo-amazon":
-					return bigTagLabel = "Amazon"; break;
-				case "home":
-					return bigTagLabel = "Home Goods"; break;
-				case "restaurant":
-					return bigTagLabel = "Eating Out"; break;
-				case "subway":
-					return bigTagLabel = "Transit"; break;
-				case "shirt":
-					return bigTagLabel = "Clothes"; break;
-				default:
-					return bigTagLabel = "Error"; break;
+				case "cart": return bigTagLabel = "Groceries"; break;
+				case "logo-amazon": return bigTagLabel = "Amazon"; break;
+				case "home": return bigTagLabel = "House Stuff"; break;
+				case "restaurant": return bigTagLabel = "Eating"; break;
+				case "subway": return bigTagLabel = "Transit"; break;
+				case "shirt": return bigTagLabel = "Clothes"; break;
+				default: return bigTagLabel = "Error"; break;
 			}
 		}
 
@@ -104,7 +89,6 @@
 			let newTagColor = tagInfo[1];
 			resetSubTotal();
 			if ((newLocation != "") && (newAmount != "")) {
-				//expenses = [...expenses, {location: newLocation}];
 				var strDay = new Date().getDay();
 				strDay = formatDay(strDay);
 				var strDayShort = strDay.substring(0, 3);
@@ -194,7 +178,6 @@
 				</ul>
 				<span class="navbar-text">
 					<!-- {startDate} - {endDate} -->
-					<!-- {formattedStartDate} - {formattedEndDate} -->
 				</span>
 			</div>
 		</div>
@@ -259,9 +242,12 @@
 				>Add</button>
 			</div>
 		</div>
-<!-- journal -->
+		<!-- journal -->
 		{#each filteredExpenses as expense}
-			<div class="row gx-3" in:fly="{{ y: 200, duration: 2000 }}" out:fade>
+			<div class="row gx-3" 
+				in:fly="{{ y: 200, duration: 2000 }}" 
+				out:fade
+			>
 				<div class="col-1 col-lg-3"></div>
 				<!-- tag -->
 				<div class="col-1 pull-left">
