@@ -87,8 +87,9 @@
 			let tagInfo = getTagInfo(newTag).split(",");
 			let newTagName= tagInfo[0];
 			let newTagColor = tagInfo[1];
+			var strAmount  = numbersOnly(newAmount);
 			resetSubTotal();
-			if ((newLocation != "") && (newAmount != "")) {
+			if ((newLocation != "") && (newAmount != "") && (error == "")) {
 				var strDay = new Date().getDay();
 				strDay = formatDay(strDay);
 				var strDayShort = strDay.substring(0, 3);
@@ -96,7 +97,8 @@
 				var strMonthVerbose = formatMonth(strMonth);
 				var strMonthShort = strMonthVerbose.substring(0, 3);
 				const docRef = addDoc(expensesCol, {
-					amount: newAmount,
+					// amount: newAmount,
+					amount: strAmount,
 					date: new Date().getDate(),
 					day: strDay,
 					dayShort: strDayShort,
@@ -115,7 +117,11 @@
 				if (newTagName == "error") {
 					return error = "A tag is required."
 				} else {
-					return error = "Both location and an amount are required."
+					if (error == "") {
+						return error = "Both location and an amount are required."
+					} else {
+						return error;
+					}
 				}
 			}
 		}
@@ -123,6 +129,14 @@
 		async function deleteExpense(index) {
 			resetSubTotal();
 			await deleteDoc(doc(db, "expenses", index));
+		}
+
+		function numbersOnly(amt) {
+			if (Number.isInteger(amt)) {
+				return amt;
+			} else {
+				return error = "Must enter a number. No commas please."
+			}
 		}
 
 		function getTagInfo(tagNumber){
@@ -231,8 +245,8 @@
 				<div class="input-group">
 					<span class="input-group-text">$</span>
 					<input type="number" class="form-control" id="exampleAmount" placeholder="Amount" 
-						on:keypress="{handleEnter}" 
-						bind:value="{newAmount}"/>
+					on:keypress="{handleEnter}" 
+					bind:value="{newAmount}"/>
 				</div>
 			</div>
 			<!-- add button -->
