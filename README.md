@@ -1,4 +1,5 @@
 # svelte-track
 
-Simple Svelte/Firebase tracking single page.
+Single page Svelte/Firebase tracking application.
 
+Config details in the wiki.
