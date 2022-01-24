@@ -87,9 +87,13 @@
 			let tagInfo = getTagInfo(newTag).split(",");
 			let newTagName= tagInfo[0];
 			let newTagColor = tagInfo[1];
+			if (error != "") { return error; }
+			var strLocation = locationRequired(newLocation);
+			if (error != "") { return error; }
 			var strAmount  = numbersOnly(newAmount);
+			if (error != "") { return error; }
 			resetSubTotal();
-			if ((newLocation != "") && (newAmount != "") && (error == "")) {
+			if ((newTagName != "") && (newLocation != "") && (newAmount != "")) {
 				var strDay = new Date().getDay();
 				strDay = formatDay(strDay);
 				var strDayShort = strDay.substring(0, 3);
@@ -97,12 +101,11 @@
 				var strMonthVerbose = formatMonth(strMonth);
 				var strMonthShort = strMonthVerbose.substring(0, 3);
 				const docRef = addDoc(expensesCol, {
-					// amount: newAmount,
 					amount: strAmount,
 					date: new Date().getDate(),
 					day: strDay,
 					dayShort: strDayShort,
-					location: newLocation,
+					location: strLocation,
 					month: (strMonth+1),
 					monthShort: strMonthShort,
 					monthVerbose: strMonthVerbose,
@@ -113,16 +116,6 @@
 				});
 				newLocation = "", newAmount = "", newTagName = "", newTagColor = "";	
 				error = "";
-			} else {
-				if (newTagName == "error") {
-					return error = "A tag is required."
-				} else {
-					if (error == "") {
-						return error = "Both location and an amount are required."
-					} else {
-						return error;
-					}
-				}
 			}
 		}
 
@@ -131,11 +124,19 @@
 			await deleteDoc(doc(db, "expenses", index));
 		}
 
+		function locationRequired(location) {
+			if (location != "") {
+				return location;
+			} else {
+				error = "A location is required."
+			}
+		}
+
 		function numbersOnly(amt) {
 			if (Number.isInteger(amt)) {
 				return amt;
 			} else {
-				return error = "Must enter a number. No commas please."
+				return error = "A number without commas is required."
 			}
 		}
 
@@ -147,7 +148,7 @@
 				case 4: return newTag = "restaurant,danger"; break;
 				case 5: return newTag = "subway,info"; break;
 				case 6: return newTag = "shirt,dark"; break;
-				default: return newTag = "error,error"; break;
+				default: return error = "A category button must be selected."
 			}
 		}
 
@@ -214,7 +215,7 @@
 			<div class="col-lg-4 mb-4">
 				<div class="btn-group d-flex text-right" role="group" aria-label="Tag Button Group">
 					<!-- grocery button -->
-					<input type="radio" class="btn-check" name="btnradio" value={1} bind:group={newTag} id="btnradioGrocery" autocomplete="off">
+					<input type="radio" class="btn-check" name="btnradio" value={1} bind:group={newTag} id="btnradioGrocery" autocomplete="off" checked>
 					<label class="btn btn-outline-secondary" for="btnradioGrocery"><ion-icon name="cart"></ion-icon></label>
 					<!-- amazon button -->
 					<input type="radio" class="btn-check" name="btnradio" value={2} bind:group={newTag} id="btnradioAmazon" autocomplete="off">
