@@ -3,7 +3,7 @@
 	import { db } from './firebase.js'
 	import { collection, query, orderBy, onSnapshot, addDoc, doc, deleteDoc } from "firebase/firestore"; 
 	import weeks from './weeks.js';
-	import { fade, fly } from 'svelte/transition';
+	import { fade, fly, slide} from 'svelte/transition';
 	import {formatDay, formatMonth} from './utils.js';
 
 	// future use 
@@ -68,6 +68,7 @@
 
 	// filtering functions
 		function setTag(tagName, tagColor) {
+			expensesByTag = [];
 			expensesByTag = expenses.filter(el => el.tag === tagName);
 			bigTagName = tagName;
 			bigTagColor = tagColor;
@@ -215,7 +216,7 @@
 			<div class="col-lg-4 mb-4">
 				<div class="btn-group d-flex text-right" role="group" aria-label="Tag Button Group">
 					<!-- grocery button -->
-					<input type="radio" class="btn-check" name="btnradio" value={1} bind:group={newTag} id="btnradioGrocery" autocomplete="off" checked>
+					<input type="radio" class="btn-check" name="btnradio" value={1} bind:group={newTag} id="btnradioGrocery" autocomplete="off">
 					<label class="btn btn-outline-secondary" for="btnradioGrocery"><ion-icon name="cart"></ion-icon></label>
 					<!-- amazon button -->
 					<input type="radio" class="btn-check" name="btnradio" value={2} bind:group={newTag} id="btnradioAmazon" autocomplete="off">
@@ -290,6 +291,7 @@
 				</div>
 			</div>
 		{/each}
+		<br /><br /><br /><br /><br /><br /><br />
 	</div>
 <!-- offcanvas data -->
 	<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
@@ -307,7 +309,11 @@
 			<div class="container">
 	<!-- list -->
 				{#each expensesByTag as expense}
-					<div class="row gx-2" in:fly="{{ x: -200, duration: 2000 }}">
+				{#key expensesByTag}
+					<div class="row gx-2" 
+					in:slide="{{duration: 2000}}" 
+					out:slide="{{duration: 0}}"
+					>
 						<div class="col-2">
 							<p class="text-start">{expense.month}.{expense.date}</p>
 						</div>
@@ -318,6 +324,7 @@
 							<p class="text-end">-{expense.amount}</p>
 						</div>
 					</div>
+					{/key}
 				{/each}
 			</div>
 		</div>
