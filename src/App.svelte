@@ -6,10 +6,6 @@
 	import { fade, fly, slide} from 'svelte/transition';
 	import {formatDay, formatMonth} from './utils.js';
 
-	// future use 
-	let formattedStartDate = " ";
-	let formattedEndDate = " ";
-
 	// collections vars
 		let expenses = [];
 		let filteredExpenses = [];
@@ -162,6 +158,7 @@
 			return subTotal;
 		}
 
+		function formatShortDate(strDate) { return strDate.toString().substring(0, 15); }
 		function handleEnter(event) { if (event.key == "Enter") { addExpense(); }}
 		function resetSubTotal(){ subTotal = parseInt(0); }
 		function resetError() { return error = ""; }
@@ -192,7 +189,7 @@
 					</li>
 				</ul>
 				<span class="navbar-text">
-					<!-- {startDate} - {endDate} -->
+					{formatShortDate(startDate)} - {formatShortDate(endDate)}
 				</span>
 			</div>
 		</div>
@@ -308,21 +305,21 @@
 			<div class="container">
 	<!-- list -->
 				{#each expensesByTag as expense}
-				{#key expensesByTag}
-					<div class="row gx-2" 
-					in:slide="{{duration: 2000}}" 
-					out:slide="{{duration: 0}}"
-					>
-						<div class="col-2">
-							<p class="text-start">{expense.month}.{expense.date}</p>
+					{#key expensesByTag}
+						<div class="row gx-2" 
+						in:slide="{{duration: 2000}}" 
+						out:slide="{{duration: 0}}"
+						>
+							<div class="col-2">
+								<p class="text-start">{expense.month}.{expense.date}</p>
+							</div>
+							<div class="col-8">
+								<p class="text-start">{expense.location}</p>
+							</div>
+							<div class="col-2">
+								<p class="text-end">-{expense.amount}</p>
+							</div>
 						</div>
-						<div class="col-8">
-							<p class="text-start">{expense.location}</p>
-						</div>
-						<div class="col-2">
-							<p class="text-end">-{expense.amount}</p>
-						</div>
-					</div>
 					{/key}
 				{/each}
 			</div>
