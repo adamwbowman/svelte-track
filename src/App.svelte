@@ -68,7 +68,6 @@
 
 	// filtering functions
 		function setTag(tagName, tagColor) {
-			expensesByTag = [];
 			expensesByTag = expenses.filter(el => el.tag === tagName);
 			bigTagName = tagName;
 			bigTagColor = tagColor;
