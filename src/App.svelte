@@ -10,6 +10,7 @@
 		let expenses = [];
 		let filteredExpenses = [];
 		let expensesByTag = [];
+		let years = [], months = [], days = [];
 
 	// date processing
 		let today = new Date();
@@ -65,6 +66,12 @@
 	// filtering functions
 		function setTag(tagName, tagColor) {
 			expensesByTag = expenses.filter(el => el.tag === tagName);
+			years = expensesByTag.map(el => el.year);
+			years = [...new Set(years)]
+			months = expensesByTag.map(el => el.monthShort);
+			months = [...new Set(months)]
+			days = expensesByTag.map(el => el.dayShort);
+			days = [...new Set(days)]
 			bigTagName = tagName;
 			bigTagColor = tagColor;
 			switch (tagName) {
@@ -303,7 +310,20 @@
 		</div>
 		<div class="offcanvas-body">
 			<div class="container">
-	<!-- list -->
+				<div class="row mb-1">
+					{#each years as year}
+					<div class="col">
+						<button type="button" class="btn btn-outline-secondary btn-sm">{year}</button>
+					</div>
+					{/each}
+				</div>
+				<div class="row mb-4">
+					{#each months as month}
+					<div class="col">
+						<button type="button" class="btn btn-outline-secondary btn-sm">{month}</button>
+					</div>
+					{/each}
+				</div>
 				{#each expensesByTag as expense}
 					{#key expensesByTag}
 						<div class="row gx-2" 
