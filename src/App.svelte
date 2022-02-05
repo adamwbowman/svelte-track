@@ -37,6 +37,7 @@
 			expenses = querySnapshot.docs.map(doc => {
 				return { id: doc.id, ...doc.data() }
 			});
+console.log(expenses);
 			filteredExpenses = expenses;
 			filterExpenses(1);
 		});
@@ -67,11 +68,11 @@
 		function setTag(tagName, tagColor) {
 			expensesByTag = expenses.filter(el => el.tag === tagName);
 			years = expensesByTag.map(el => el.year);
-			years = [...new Set(years)]
+			years = [...new Set(years)];
 			months = expensesByTag.map(el => el.monthShort);
-			months = [...new Set(months)]
+			months = [...new Set(months)];
 			days = expensesByTag.map(el => el.dayShort);
-			days = [...new Set(days)]
+			days = [...new Set(days)];
 			bigTagName = tagName;
 			bigTagColor = tagColor;
 			switch (tagName) {
@@ -261,7 +262,7 @@
 				>Add</button>
 			</div>
 		</div>
-		<!-- journal -->
+<!-- journal -->
 		{#each filteredExpenses as expense}
 			<div class="row gx-3" 
 				in:fly="{{ y: 200, duration: 2000 }}" 
@@ -312,14 +313,14 @@
 			<div class="container">
 				<div class="row mb-1">
 					{#each years as year}
-					<div class="col">
+					<div class="col-2">
 						<button type="button" class="btn btn-outline-secondary btn-sm">{year}</button>
 					</div>
 					{/each}
 				</div>
 				<div class="row mb-4">
 					{#each months as month}
-					<div class="col">
+					<div class="col-2">
 						<button type="button" class="btn btn-outline-secondary btn-sm">{month}</button>
 					</div>
 					{/each}
