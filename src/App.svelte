@@ -37,7 +37,7 @@
 			expenses = querySnapshot.docs.map(doc => {
 				return { id: doc.id, ...doc.data() }
 			});
-console.log(expenses);
+console.table(expenses);
 			filteredExpenses = expenses;
 			filterExpenses(1);
 		});
@@ -99,8 +99,8 @@ console.log(expenses);
 			resetSubTotal();
 			if ((newTagName != "") && (newLocation != "") && (newAmount != "")) {
 				var strDay = new Date().getDay();
-				strDay = formatDay(strDay);
-				var strDayShort = strDay.substring(0, 3);
+				var strDayName = formatDay(strDay);
+				var strDayNameShort = strDayName.substring(0, 3);
 				var strMonth = new Date().getMonth();
 				var strMonthVerbose = formatMonth(strMonth);
 				var strMonthShort = strMonthVerbose.substring(0, 3);
@@ -108,7 +108,8 @@ console.log(expenses);
 					amount: strAmount,
 					date: new Date().getDate(),
 					day: strDay,
-					dayShort: strDayShort,
+					dayShort: strDayNameShort,
+					dayVerbose: strDayName,
 					location: strLocation,
 					month: (strMonth+1),
 					monthShort: strMonthShort,
