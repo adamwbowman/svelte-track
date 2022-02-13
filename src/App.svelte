@@ -279,7 +279,7 @@
 						</button>
 					</div>
 				<div class="col-5 col-lg-3">
-					<p class="ps-2 p-md-0">{expense.createdAt.toDate()}: {expense.dayShort}: {expense.location}</p>
+					<p class="ps-2 p-md-0">{expense.dayShort}: {expense.location}</p>
 				</div>
 				<div class="col-2 col-lg-1 overflow-auto">
 					<p class="text-end">-{expense.amount}</p>
