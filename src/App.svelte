@@ -24,7 +24,7 @@
 		let currentWeek = weeks.find(el => (el.week == (findWeek.week -1)));
 		let startDate = new Date(currentWeek.start);
 		let endDate = new Date(currentWeek.end);
-		console.log(startDate+"-"+endDate);
+		console.log("currentWeek: "+startDate+"-"+endDate);
 
 	// firestore entire get collection
 		const expensesCol = collection(db, 'expenses');
@@ -37,7 +37,7 @@
 			expenses = querySnapshot.docs.map(doc => {
 				return { id: doc.id, ...doc.data() }
 			});
-console.table(expenses);
+			// console.table(expenses);
 			filteredExpenses = expenses;
 			filterExpenses(1);
 		});
@@ -279,7 +279,7 @@ console.table(expenses);
 						</button>
 					</div>
 				<div class="col-5 col-lg-3">
-					<p class="ps-2 p-md-0">{expense.dayShort}: {expense.location}</p>
+					<p class="ps-2 p-md-0">{expense.createdAt.toDate()}: {expense.dayShort}: {expense.location}</p>
 				</div>
 				<div class="col-2 col-lg-1 overflow-auto">
 					<p class="text-end">-{expense.amount}</p>
@@ -306,7 +306,7 @@ console.table(expenses);
 				<button type="button" class="btn btn-{bigTagColor}"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
 					<ion-icon name="{bigTagName}"></ion-icon>
 				</button>
-				 &nbsp; {bigTagLabel}
+				&nbsp; {bigTagLabel}
 			</h5>
 			<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 		</div>
